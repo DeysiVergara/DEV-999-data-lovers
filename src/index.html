@@ -6,7 +6,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <header>
+      <h1>Data Lovers</h1>
+    </header>
+    <main>
+      <input type="text" id="input-user">
+      <select id="select-order">
+        <option disabled selected>Elige el orden segun nombre</option>
+        <option>A-Z</option>
+        <option>Z-A</option>
+      </select>
+      <select id="select-type">
+        <option disabled selected>Elige el tipo</option>
+        <option>Fire</option>
+        <option>Grass</option>
+      </select>
+      <button id="estadistics">Estadisticas</button>
+      <div id="root"></div>
+    </main>
+    <footer></footer>
     <script src="main.js" type="module"></script>
   </body>
 </html>
