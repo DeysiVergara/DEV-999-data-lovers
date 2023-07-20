@@ -1,4 +1,4 @@
-import { sortPokemon, filterPokemon, estadistic } from '../src/data.js';
+import { sortData, filterData, averageStats } from '../src/data.js';
 
 const fakeData = [
   {
@@ -40,7 +40,7 @@ const fakeData = [
     }
   }
 ]
-describe('sortPokemon', () => {
+describe('sortData', () => {
   const orderedData = [
     {
       name: "charizard",
@@ -82,16 +82,16 @@ describe('sortPokemon', () => {
     }, 
   ]
 
-  it('returns acs ordered data', () => {
-    expect(sortPokemon(fakeData, 'name', 'asc')).toEqual(orderedData);
+  it('returns asc ordered data', () => {
+    expect(sortData(fakeData, 'name', 'Asc')).toEqual(orderedData);
   });
 
   it('returns desc ordered data', () => {
-    expect(sortPokemon(fakeData, 'name', 'desc')).toEqual(orderedData.reverse());
+    expect(sortData(fakeData, 'name', 'Desc')).toEqual(orderedData.reverse());
   });
 });
 
-describe('filterPokemon', () => {
+describe('filterData', () => {
   const filteredDataName = [
     {
       name: "charizard",
@@ -129,17 +129,17 @@ describe('filterPokemon', () => {
   ]
 
   it('returns filtered data by name', () => {
-    expect(filterPokemon(fakeData, 'name', 'charizar')).toEqual(filteredDataName);
+    expect(filterData(fakeData, 'name', 'charizar')).toEqual(filteredDataName);
   });
 
   it('returns filtered by type', () => {
-    expect(filterPokemon(fakeData, 'type', 'grass')).toEqual(filteredDataType);
+    expect(filterData(fakeData, 'type', 'grass')).toEqual(filteredDataType);
   });
 });
 
 describe('estadistic', () => {
   it('returns a estadistic by base attack', () => {
-    expect(estadistic(fakeData)).toEqual(150.75);
+    expect(averageStats(fakeData, 'base-attack')).toEqual(150.75);
   });
 
 });

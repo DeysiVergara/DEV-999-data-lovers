@@ -1,7 +1,7 @@
-export const typePokemon = (arrayPokemon) => {
-  const arrayType= arrayPokemon.map(element => element.type).flat();
+export const getArrayUnique = (arrayData, property) => {
+  const arrayWithDoubles = arrayData.map(element => element[property]).flat();
   const arrayUniques = [];
-  arrayType.forEach(type => {
+  arrayWithDoubles.forEach(type => {
     if(!arrayUniques.includes(type)){
       arrayUniques.push(type)
     }
@@ -9,24 +9,24 @@ export const typePokemon = (arrayPokemon) => {
   return arrayUniques
 }
 
-export const filterPokemon = (arrayPokemon, property, condition) => {
-  return arrayPokemon.filter(elem => elem[property].includes(condition.toLowerCase()));
+export const filterData = (arrayData, property, condition) => {
+  return arrayData.filter(elem => elem[property].includes(condition.toLowerCase()));
 };
 
-export const sortPokemon = (arrayPokemon, property, condition) => {
-  const newArrayPokemon = arrayPokemon.slice();
-  if(condition === 'A-Z') {
-    newArrayPokemon.sort((a,b) => a[property].localeCompare(b[property]))
+export const sortData = (arrayData, property, condition) => {
+  const copyArray = arrayData.slice();
+  if(condition === 'Asc') {
+    copyArray.sort((a,b) => a[property].localeCompare(b[property]))
   }else {
-    newArrayPokemon.sort((b,a) => a[property].localeCompare(b[property]))
+    copyArray.sort((b,a) => a[property].localeCompare(b[property]))
   }
-  return newArrayPokemon;
+  return copyArray;
 };
 
-export const average = (arrayPokemon, property) => {
+export const averageStats = (arrayData, property) => {
   let suma = 0;
-  arrayPokemon.forEach(element => {
+  arrayData.forEach(element => {
     suma += Number(element.stats[property]);
   });
-  return parseFloat((suma/arrayPokemon.length).toFixed(2))
+  return parseFloat((suma/arrayData.length).toFixed(2))
 }
