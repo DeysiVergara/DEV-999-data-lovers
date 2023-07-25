@@ -15,7 +15,7 @@ export const filterData = (arrayData, property, condition) => {
 
 export const sortData = (arrayData, property, condition) => {
   const copyArray = arrayData.slice();
-  if(condition === 'Asc') {
+  if(condition === 'asc') {
     copyArray.sort((a,b) => a[property].localeCompare(b[property]))
   }else {
     copyArray.sort((b,a) => a[property].localeCompare(b[property]))

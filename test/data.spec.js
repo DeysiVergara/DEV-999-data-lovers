@@ -83,11 +83,11 @@ describe('sortData', () => {
   ]
 
   it('returns asc ordered data', () => {
-    expect(sortData(fakeData, 'name', 'Asc')).toEqual(orderedData);
+    expect(sortData(fakeData, 'name', 'asc')).toEqual(orderedData);
   });
 
   it('returns desc ordered data', () => {
-    expect(sortData(fakeData, 'name', 'Desc')).toEqual(orderedData.reverse());
+    expect(sortData(fakeData, 'name', 'desc')).toEqual(orderedData.reverse());
   });
 });
 

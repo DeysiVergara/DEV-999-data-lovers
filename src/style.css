@@ -8,3 +8,15 @@
     margin: 3px;
     text-align: center;
 }
+
+header{
+    color: gray    
+}
+
+footer{
+    text-align: end;
+}
+
+#select-order{
+padding: auto;
+}
