@@ -38,13 +38,6 @@ const getASTMetrics = (node, [
   if (node.type === "CallExpression" &&
     node.callee.type === "MemberExpression" &&
     node.callee.property.type === "Identifier" &&
-    node.callee.property.name === "split") {
-    splitCalls.push(node);
-  }
-
-  if (node.type === "CallExpression" &&
-    node.callee.type === "MemberExpression" &&
-    node.callee.property.type === "Identifier" &&
     node.callee.property.name === "sort") {
     sortCalls.push(node);
   }
