@@ -16,7 +16,7 @@ import { test, expect } from '@playwright/test';
 //     await newTodo.press('Enter');
 
 //     // Make sure the list only has one todo item.
-//     await expect(page.getByTestId('pokemonBox')).toHaveText([
+//     await expect(page.getByTestId('card')).toHaveText([
 //       TODO_ITEMS
 //     ]);
 

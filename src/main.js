@@ -1,4 +1,4 @@
-import { filterData, sortData, averageStats, getArrayUnique } from './data.js';
+import { filterData, sortData, getArrayUnique, computeStats } from './data.js';
 import data from './data/pokemon/pokemon.js';
 const root = document.getElementById('root')
 const inputUser = document.querySelector('#input-user');
@@ -9,50 +9,50 @@ const estadistics = document.querySelector('#estadistics');
 
 inputUser.addEventListener('keyup', (e) => {
   const arrayFiltered = filterData(data.pokemon, 'name', e.target.value);
-  printView(arrayFiltered);
+  renderView(arrayFiltered);
 })
 
 selectOrder.addEventListener('change', (e) => {
   const arrayOrdered = sortData(data.pokemon, 'name', e.target.value);
-  printView(arrayOrdered);
+  renderView(arrayOrdered);
 })
 
 selectType.addEventListener('change', (e) => {
   const arrayType = filterData(data.pokemon, 'type', e.target.value);
-  printView(arrayType);
+  renderView(arrayType);
 })
 
 estadistics.addEventListener('click', () => {
   root.innerHTML = `
-                    <p>Este es el promedio de base attack ${averageStats(data.pokemon, 'base-attack')}</p>
-                    <p>Este es el promedio de base defense ${averageStats(data.pokemon, 'base-defense')}</p>
-                    <p>Este es el promedio de base stamina ${averageStats(data.pokemon, 'base-stamina')}</p>
-                    <p>Este es el promedio de max-cp ${averageStats(data.pokemon, 'max-cp')}</p>
-                    <p>Este es el promedio de max-cp ${averageStats(data.pokemon, 'max-hp')}</p>
+                    <p>Este es el promedio de base attack ${computeStats(data.pokemon, 'base-attack')}</p>
+                    <p>Este es el promedio de base defense ${computeStats(data.pokemon, 'base-defense')}</p>
+                    <p>Este es el promedio de base stamina ${computeStats(data.pokemon, 'base-stamina')}</p>
+                    <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-cp')}</p>
+                    <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-hp')}</p>
                     `;
 })
 
 
-const printView = (arrayPokemon) => {
-  let html = `<div class='wrap'>`;
-  arrayPokemon.forEach(element => {
-    html += `<div class= "pokemonBox">
+const renderView = (arrayData) => {
+  let html = `<div><ul class='wrap'>`;
+  arrayData.map(element => {
+    html += `<li class= "card">
               <img src=${element.img}>
               <p>${element.name}</p>
-              </div>
+             </li>
             `
   });
-  html += `</div>`
+  html += `<ul></div>`
   root.innerHTML = html;
 }
-printView(data.pokemon);
+renderView(data.pokemon);
 
-const printTypes = () =>{
+const renderTypes = () =>{
   let opciones = `<option selected disabled>Selecciona el tipo</option>`;
-  getArrayUnique(data.pokemon, 'type').forEach( type => {
+  getArrayUnique(data.pokemon, 'type').map( type => {
     opciones += `<option>${type}</option>`
   })
   selectType.innerHTML = opciones;
 }
 
-printTypes();
+renderTypes();

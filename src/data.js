@@ -1,12 +1,11 @@
 export const getArrayUnique = (arrayData, property) => {
   const arrayWithDoubles = arrayData.map(element => element[property]).flat();
-  const arrayUniques = [];
-  arrayWithDoubles.forEach(type => {
-    if(!arrayUniques.includes(type)){
-      arrayUniques.push(type)
+  return arrayWithDoubles.reduce((acc,item)=>{
+    if(acc.indexOf(item) === -1){
+      acc.push(item);
     }
-  })
-  return arrayUniques
+    return acc;
+  },[]);
 }
 
 export const filterData = (arrayData, property, condition) => {
@@ -23,10 +22,11 @@ export const sortData = (arrayData, property, condition) => {
   return copyArray;
 };
 
-export const averageStats = (arrayData, property) => {
-  let suma = 0;
-  arrayData.forEach(element => {
-    suma += Number(element.stats[property]);
-  });
-  return parseFloat((suma/arrayData.length).toFixed(2))
+export const computeStats = (arrayData, property) => {
+  const initialValue = 0;
+  const sumWithInitial = arrayData.reduce(
+    (accumulator, currentValue) => accumulator + Number(currentValue.stats[property]),
+    initialValue
+  );
+  return parseFloat((sumWithInitial/arrayData.length).toFixed(2))
 }

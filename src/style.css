@@ -1,9 +1,10 @@
 .wrap{
     display: flex;
     flex-wrap: wrap;
+    list-style: none;
 }
 
-.pokemonBox{
+.card{
     border-style: solid;
     margin: 3px;
     text-align: center;

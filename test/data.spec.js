@@ -1,4 +1,4 @@
-import { sortData, filterData, averageStats } from '../src/data.js';
+import { sortData, filterData, computeStats } from '../src/data.js';
 
 const fakeData = [
   {
@@ -139,7 +139,7 @@ describe('filterData', () => {
 
 describe('estadistic', () => {
   it('returns a estadistic by base attack', () => {
-    expect(averageStats(fakeData, 'base-attack')).toEqual(150.75);
+    expect(computeStats(fakeData, 'base-attack')).toEqual(150.75);
   });
 
 });
