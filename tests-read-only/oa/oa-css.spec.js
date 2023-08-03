@@ -1,12 +1,14 @@
-const fs = require('fs');
-const css = require('css');
+/**
+ * @jest-environment jsdom
+*/
+import fs from 'fs';
+import css from 'css';
 const html = fs.readFileSync('./src/index.html', 'utf-8');
+document.body.innerHTML = html;
+import { renderView } from '../../src/data.js';
 
-const { document } = window;
-document.innerHTML = html;
-// const renderView = require('../../src/main.js');
-//const stylesPath = document.querySelector('link[rel="stylesheet"]').getAttribute('href');
-const style = fs.readFileSync('./src/' + 'style.css', 'utf-8');
+const stylesPath = document.querySelector('link[rel="stylesheet"]').getAttribute('href');
+const style = fs.readFileSync('./src/' + stylesPath, 'utf-8');
 const { rules } = css.parse(style).stylesheet;
 
 const BOX_MODEL_ATTRIBUTES = ['width', 'height', 'margin', 'padding', 'border', 'box-sizing', 'background'];
@@ -30,32 +32,27 @@ const fakeData = [
   },
 ];
 
-// jest.mock('../../src/main.js');
 
 describe('CSS', () => {
-  // console.log(document);
 
-  // const select = document.querySelectorAll('select');
-  // const selectClasses = Array.from(select.classList.values());
-
-  // const lis = Array.from(ul.querySelectorAll('li'));
+  const select = document.querySelector('select');
+  const selectClasses = Array.from(select.classList.values());
 
   describe('Uso de selectores de CSS', () => {
-    it('Se busca', () => {
-      const { renderView } = require('../../src/main.js');
-      renderView(fakeData);
-      console.log(document);
+    it('Class .card en el li', () => {
+      const newData = renderView(fakeData);
+      const root = document.querySelector('#root');
+      root.innerHTML = newData;
+      const card = document.querySelector('.card');
+      const classLi = card.getAttribute('class');
+      const liRules = getRulesForSelector(`.${classLi}`);
+      expect(liRules.length).toBeGreaterThan(0);
       // expect(headerRules.length).toBeGreaterThan(0);
     });
 
     it('Se usan selectores CSS de tipo para <header>', () => {
       const headerRules = getRulesForSelector('header');
       expect(headerRules.length).toBeGreaterThan(0);
-    });
-
-    it('Se usan selectores CSS de tipo para <footer>', () => {
-      const footerRules = getRulesForSelector('footer');
-      expect(footerRules.length).toBeGreaterThan(0);
     });
 
     it('Se usan selectores CSS de tipo para <footer>', () => {

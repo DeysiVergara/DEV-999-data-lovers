@@ -30,3 +30,16 @@ export const computeStats = (arrayData, property) => {
   );
   return parseFloat((sumWithInitial/arrayData.length).toFixed(2))
 }
+
+export const renderView = (arrayData) => {
+  let html = `<div><ul class='wrap'>`;
+  arrayData.map(element => {
+    html += `<li class= "card">
+              <img src=${element.img}>
+              <p>${element.name}</p>
+             </li>
+            `
+  });
+  html += `<ul></div>`
+  return html;
+}

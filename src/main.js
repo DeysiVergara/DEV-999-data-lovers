@@ -1,4 +1,4 @@
-import { filterData, sortData, getArrayUnique, computeStats } from './data.js';
+import { filterData, sortData, getArrayUnique, computeStats, renderView } from './data.js';
 import data from './data/pokemon/pokemon.js';
 const root = document.getElementById('root')
 const inputUser = document.querySelector('#input-user');
@@ -32,20 +32,7 @@ estadistics.addEventListener('click', () => {
                     `;
 })
 
-
-export const renderView = (arrayData) => {
-  let html = `<div><ul class='wrap'>`;
-  arrayData.map(element => {
-    html += `<li class= "card">
-              <img src=${element.img}>
-              <p>${element.name}</p>
-             </li>
-            `
-  });
-  html += `<ul></div>`
-  root.innerHTML = html;
-}
-renderView(data.pokemon);
+root.innerHTML = renderView(data.pokemon);
 
 const renderTypes = () =>{
   let opciones = `<option selected disabled>Selecciona el tipo</option>`;
