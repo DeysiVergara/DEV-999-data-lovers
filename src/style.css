@@ -8,6 +8,8 @@
     border-style: solid;
     margin: 3px;
     text-align: center;
+    height: 15%;
+    width: 15%;
 }
 
 header{
@@ -31,4 +33,13 @@ select[name=select-type]{
 .flexNav{
     display: flex;
     justify-content: space-around;
+}
+
+label{
+    font-size: larger;
+}
+
+img{
+    width: 50%;
+    height: 50%;
 }

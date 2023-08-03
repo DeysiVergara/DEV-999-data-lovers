@@ -25,13 +25,21 @@ const fakeData = [
   {
     name: "charizard",
     img: "https://www.serebii.net/pokemongo/pokemon/006.png",
+    num: '006',
+    type: [
+      "fire",
+      "flying"
+    ],
   },
   {
     name: "charmeleon",
     img: "https://www.serebii.net/pokemongo/pokemon/005.png",
+    num: '005',
+    type: [
+      "fire"
+    ],
   },
 ];
-
 
 describe('CSS', () => {
 
@@ -47,7 +55,6 @@ describe('CSS', () => {
       const classLi = card.getAttribute('class');
       const liRules = getRulesForSelector(`.${classLi}`);
       expect(liRules.length).toBeGreaterThan(0);
-      // expect(headerRules.length).toBeGreaterThan(0);
     });
 
     it('Se usan selectores CSS de tipo para <header>', () => {

@@ -1,13 +1,3 @@
-export const getArrayUnique = (arrayData, property) => {
-  const arrayWithDoubles = arrayData.map(element => element[property]).flat();
-  return arrayWithDoubles.reduce((acc,item)=>{
-    if(acc.indexOf(item) === -1){
-      acc.push(item);
-    }
-    return acc;
-  },[]);
-}
-
 export const filterData = (arrayData, property, condition) => {
   return arrayData.filter(elem => elem[property].includes(condition.toLowerCase()));
 };
@@ -31,15 +21,30 @@ export const computeStats = (arrayData, property) => {
   return parseFloat((sumWithInitial/arrayData.length).toFixed(2))
 }
 
+export const getArrayUnique = (arrayData, property) => {
+  const arrayWithDoubles = arrayData.map(element => element[property]).flat();
+  return arrayWithDoubles.reduce((acc,item)=>{
+    if(acc.indexOf(item) === -1){
+      acc.push(item);
+    }
+    return acc;
+  },[]);
+}
+
+// TODO: revisamos si colocamos el render view se queda aqui o si colocamos render view en un windows.
+// addeventlistener DOMContentLoaded en el main.js.
 export const renderView = (arrayData) => {
-  let html = `<div><ul class='wrap'>`;
-  arrayData.map(element => {
-    html += `<li class= "card">
-              <img src=${element.img}>
-              <p>${element.name}</p>
-             </li>
-            `
-  });
-  html += `<ul></div>`
-  return html;
+  const lis = arrayData.map(element => `<li class= "card">
+                                          <img src=${element.img}>
+                                          <p>Name: ${element.name}</p>
+                                          <p>Num: ${element.num}</p>
+                                          <p>Type: ${element.type.join(', ')}</p>
+                                        </li>`);
+  return  `<div><ul class='wrap'>${lis.join('')}<ul></div>`;
+}
+
+export const renderTypes = (arrayData) =>{
+  const firstOption = `<option selected disabled>Selecciona el tipo</option>`;
+  const options = getArrayUnique(arrayData, 'type').map( type => `<option>${type}</option>`);
+  return firstOption + options.join('');
 }
