@@ -2,8 +2,8 @@ import { filterData, sortData, getArrayUnique, computeStats, renderView } from '
 import data from './data/pokemon/pokemon.js';
 const root = document.getElementById('root')
 const inputUser = document.querySelector('#input-user');
-const selectOrder = document.querySelector('#select-order');
-const selectType = document.querySelector('#select-type');
+const selectOrder = document.querySelector('[name="select-order"]');
+const selectType = document.querySelector('[name="select-type"]');
 const estadistics = document.querySelector('#estadistics');
 
 

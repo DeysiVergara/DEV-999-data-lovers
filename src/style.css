@@ -11,13 +11,24 @@
 }
 
 header{
-    color: gray    
+    color: gray;
+    text-align: center;  
 }
 
 footer{
     text-align: end;
 }
 
-#select-order{
-padding: auto;
+select[name=select-order]{
+    padding: auto;
+}
+
+
+select[name=select-type]{
+    padding: auto;
+}
+
+.flexNav{
+    display: flex;
+    justify-content: space-around;
 }

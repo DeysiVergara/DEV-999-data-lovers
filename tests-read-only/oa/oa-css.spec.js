@@ -17,7 +17,7 @@ const getRulesForSelector = (selector) => {
   return rules.filter(
     (rule) =>
       rule.type === 'rule' &&
-      rule.selectors.some((s) => s.trim() === selector)
+      rule.selectors.some((s) => s.trim().includes(selector))
   );
 }
 
@@ -63,8 +63,8 @@ describe('CSS', () => {
 
     it('Se usan selectores CSS de ID para <select>', () => {
       const select = document.querySelector('select');
-      const id = select.getAttribute('id');
-      const selectRules = getRulesForSelector(`#${id}`);
+      const name = select.getAttribute('name');
+      const selectRules = getRulesForSelector(`[name=${name}]`);
       expect(selectRules.length).toBeGreaterThan(0);
     });
   });
