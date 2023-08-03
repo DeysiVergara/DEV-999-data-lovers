@@ -40,5 +40,9 @@
     "createdAt": "2023-07-15T18:10:25.570Z",
     "version": "6.4.0",
     "commit": "23398b101da847a5a056af6ccfe939a3d6d9098d"
+  },
+
+  "jest":{
+    "testEnvironment": "jsdom"
   }
 }

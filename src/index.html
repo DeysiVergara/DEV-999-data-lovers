@@ -8,16 +8,19 @@
   <body>
     <header>
       <h1>Data Lovers</h1>
+      <h2>Pokemon lover</h2>
     </header>
     <main>
       <input type="text" id="input-user" placeholder="Busqueda por nombre">
-      <select id="select-order">
-        <option disabled selected>Elige el orden segun nombre</option>
-        <option>asc</option>
-        <option>desc</option>
-      </select>
-      <select id="select-type">   
-      </select>
+      <label for="select-order">Ordenar por nombre</label>
+        <select id="select-order">
+          <option disabled selected>Elige el orden segun nombre</option>
+          <option>asc</option>
+          <option>desc</option>
+        </select>
+      <label for="select-type">Ordenar por tipo</label>
+        <select id="select-type">   
+        </select>
       <button id="estadistics">Estadisticas</button>
       <div id="root"></div>
     </main>

@@ -33,7 +33,7 @@ estadistics.addEventListener('click', () => {
 })
 
 
-const renderView = (arrayData) => {
+export const renderView = (arrayData) => {
   let html = `<div><ul class='wrap'>`;
   arrayData.map(element => {
     html += `<li class= "card">

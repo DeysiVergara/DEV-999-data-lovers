@@ -6,15 +6,14 @@ const page = new JSDOM(html);
 const { window } = page;
 const { document } = window;
 
-describe('Uso de HTML semántico', () => {  
+describe('Uso de HTML semántico', () => {
 
   describe('<header>', () => {
-    
+    const h2 = document.querySelector('h2');
     const header = document.querySelector('header');
-
     const h1 = header.querySelector('h1');
 
-    it('La aplicación usa un <header>', () => {    
+    it('La aplicación usa un <header>', () => {
       expect(header).not.toBeNull();
     });
 
@@ -30,7 +29,7 @@ describe('Uso de HTML semántico', () => {
       expect(header.getAttribute('name')).toBeNull();
     });
 
-    it('<header> es padre de un <h1>', () => {          
+    it('<header> es padre de un <h1>', () => {
       expect(h1).not.toBeNull();
     });
 
@@ -45,31 +44,38 @@ describe('Uso de HTML semántico', () => {
     it('<h1> no tiene atributo "name"', () => {
       expect(h1.getAttribute('name')).toBeNull();
     });
+
+    it('<header> es padre de un <h2>', () => {
+      expect(h2).not.toBeNull();
+    });
   });
 
   describe('<select>', () => {
-    
-    const select = document.querySelector('select');
+    const select = document.querySelectorAll('select');
 
     it('La aplicación usa un <select>', () => {
       expect(select).not.toBeNull();
     });
 
-    // it('<select> tiene el atributo "name" en el valor "user-input"', () => {
-    //   expect(textarea.getAttribute('name')).toBe('user-input');
-    // });
+    Array.from(select).forEach((element) => {
+      it('<select> tiene atributo "id"', () => {
+        expect(element.getAttribute('id')).not.toBeNull();
+      });
 
-    it('<select> tiene atributo "id"', () => {
-      expect(select.getAttribute('id')).not.toBeNull();
-    });
+      it('<select> no tiene atributo "class"', () => {
+        expect(element.getAttribute('class')).toBeNull();
+      });
 
-    it('<select> no tiene atributo "class"', () => {
-      expect(select.getAttribute('class')).toBeNull();
+      it('<label> existe', () => {
+        const previousFor = element.previousElementSibling.getAttribute('for');
+        const nextFor = element.nextElementSibling.getAttribute('for');
+        expect(previousFor || nextFor ).toBe(element.id);
+      })
     });
   });
 
   // describe('<ul>', () => {
-    
+
   //   const ul = document.querySelector('ul');
 
   //   const lis = ul.querySelectorAll('li');
@@ -115,7 +121,20 @@ describe('Uso de HTML semántico', () => {
 
   describe('<button>', () => {
     const button = document.querySelector('button');
-    
+
+    it('La aplicación usa un <button>', () => {
+      expect(button).not.toBeNull();
+    });
+
+    it('<button> tiene el atributo "id" en el valor "reset-button"', () => {
+      expect(button.getAttribute('reset-button')).toBeNull();
+    });
+  });
+
+  describe('<ul>', () => {
+    // const ul = document.querySelector('ul');
+    const button = document.querySelector('button');
+
     it('La aplicación usa un <button>', () => {
       expect(button).not.toBeNull();
     });
@@ -126,9 +145,9 @@ describe('Uso de HTML semántico', () => {
   });
 
   describe('<footer>', () => {
-    
+
     const footer = document.querySelector('footer');
-    
+
     const p = footer.querySelector('p');
 
     it('La aplicación usa un <footer>', () => {
@@ -145,9 +164,9 @@ describe('Uso de HTML semántico', () => {
 
     it('<footer> no tiene atributo "name"', () => {
       expect(footer.getAttribute('name')).toBeNull();
-    });   
+    });
 
-    it('<footer> es padre de un <p>', () => {      
+    it('<footer> es padre de un <p>', () => {
       expect(p).not.toBeNull();
     });
 
@@ -161,7 +180,7 @@ describe('Uso de HTML semántico', () => {
 
     it('<p> no tiene atributo "name"', () => {
       expect(p.getAttribute('name')).toBeNull();
-    });      
+    });
   });
 
 });
