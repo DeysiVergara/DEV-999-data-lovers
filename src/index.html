@@ -6,7 +6,38 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <header>
+      <h1>Data Lovers</h1>
+      <h2>Pokemon lover</h2>
+    </header>
+    <main>
+      <div class="flexNav">
+        <div>
+          <label>Búsqueda: </label>
+          <input type="text" id="input-user" placeholder="Busqueda por nombre">
+        </div>
+        <div>
+          <label for="select-order">Ordenar por nombre: </label>
+          <select name="select-order">
+            <option disabled selected>Elige el orden segun nombre</option>
+            <option>asc</option>
+            <option>desc</option>
+          </select>
+        </div>
+        <div>
+          <label for="select-type">Filtro por tipo: </label>
+          <select name="select-type">   
+          </select>
+          <button id="estadistics">Estadisticas</button>
+        </div>
+      </div>
+      <div id="root"></div>
+    </main>
+    <footer>
+      <p>
+        Deysi Vergara
+      </p>
+    </footer>
     <script src="main.js" type="module"></script>
   </body>
 </html>
