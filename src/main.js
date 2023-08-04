@@ -64,4 +64,3 @@ selectType.innerHTML = renderTypes(data.pokemon);
 //   })
   
 // });
-
