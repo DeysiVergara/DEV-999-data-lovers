@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    padding: auto;
+    margin: 5px;
 }
 
 .card{
@@ -23,12 +23,12 @@ footer{
 }
 
 select[name=select-order]{
-    padding: auto;
+    padding: 5px;
 }
 
 
 select[name=select-type]{
-    padding: auto;
+    padding: 5px;
 }
 
 .flexNav{
@@ -43,4 +43,16 @@ label{
 img{
     width: 50%;
     height: 50%;
+}
+
+h2{
+    text-align: center;
+}
+
+button{
+    padding: 5px;
+}
+
+input{
+    padding: 5px;
 }

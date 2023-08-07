@@ -2,11 +2,9 @@
  * @jest-environment jsdom
 */
 import fs from 'fs';
-
+import { renderView } from '../../src/data.js';
 const html = fs.readFileSync('./src/index.html', 'utf-8');
 document.body.innerHTML = html;
-import { renderView } from '../../src/data.js';
-
 const fakeData = [
   {
     name: "charizard",
@@ -26,6 +24,7 @@ const fakeData = [
     ],
   },
 ];
+document.querySelector('#root').innerHTML = renderView(fakeData);
 
 describe('Uso de HTML semántico', () => {
 
@@ -71,6 +70,15 @@ describe('Uso de HTML semántico', () => {
     });
   });
 
+  describe('<main>', () => {
+    const main = document.querySelector('main');
+    const h2 = main.querySelector('h2');
+
+    it('<Hay un h2 en el main> es padre de un <h2>', () => {
+      expect(h2).not.toBeNull();
+    });
+  });
+
   describe('<select>', () => {
     const select = document.querySelectorAll('select');
 
@@ -96,11 +104,9 @@ describe('Uso de HTML semántico', () => {
   });
 
   describe('<ul>', () => {
-    const documentRendered = renderView(fakeData);
-    const root = document.querySelector('#root');
-    root.innerHTML = documentRendered;
-    const lis = document.querySelector('li');
-    const uls = lis.querySelectorAll('ul');
+    const uls = document.querySelector('ul');
+    const lis = uls.querySelector('li');
+
 
     it('La aplicación usa un <li>', () => {
       expect(uls).not.toBeNull();
@@ -150,7 +156,6 @@ describe('Uso de HTML semántico', () => {
     //     });
     //   });
   });
-
 
   describe('<footer>', () => {
 
