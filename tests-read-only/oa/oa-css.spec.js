@@ -40,17 +40,20 @@ const fakeData = [
     ],
   },
 ];
+const newData = renderView(fakeData);
+const root = document.querySelector('#root');
+root.innerHTML = newData;
 
 describe('CSS', () => {
 
   const select = document.querySelector('select');
   const selectClasses = Array.from(select.classList.values());
-
+  const ul = document.querySelector('ul');
+  const ulClasses = Array.from(ul.classList.values());
+  const lis = Array.from(ul.querySelectorAll('li'));
+  
   describe('Uso de selectores de CSS', () => {
     it('Class .card en el li', () => {
-      const newData = renderView(fakeData);
-      const root = document.querySelector('#root');
-      root.innerHTML = newData;
       const card = document.querySelector('.card');
       const classLi = card.getAttribute('class');
       const liRules = getRulesForSelector(`.${classLi}`);
@@ -76,5 +79,47 @@ describe('CSS', () => {
     });
   });
 
+  describe('Modelo de caja (box model)', () => {
+    it('Se usan atributos de modelo de caja en clase CSS para <ul>', () => {
+      let allRulesAttributes = [];
+      ulClasses.forEach((ulClass) => {
+        console.log(ulClass);
+        const ulRules = getRulesForSelector(`.${ulClass}`);
+        const ulRulesAttributes = ulRules[0].declarations.map((declaration) => declaration.property);
+        allRulesAttributes = allRulesAttributes.concat(ulRulesAttributes);
+      });
+      //expect at least one attribute starts with at least one element of boxModelAttributes
+      expect(
+        allRulesAttributes.some(
+          (attribute) => BOX_MODEL_ATTRIBUTES.some(
+            boxModelAttribute => attribute.startsWith(boxModelAttribute)
+          )
+        )
+      ).toBe(true);
+    });
+  
+    it('Se usan atributos de modelo de caja en clase CSS para <li>', () => {
+      let allRulesAttributes = [];
+      lis.forEach((li) => {
+        const liClasses = Array.from(li.classList.values());
+        liClasses.forEach((liClass) => {
+          const liRules = getRulesForSelector(`.${liClass}`);
+          const ulRulesAttributes = liRules[0].declarations.map((declaration) => declaration.property);
+          allRulesAttributes = allRulesAttributes.concat(ulRulesAttributes);
+        });
+      });
+  
+      //expect at least one ulRulesAttributes starts with at least one element of boxModelAttributes
+      expect(
+        allRulesAttributes.some(
+          (attribute) => BOX_MODEL_ATTRIBUTES.some(
+            boxModelAttribute => attribute.startsWith(boxModelAttribute)
+          )
+        )        
+      ).toBe(true);
+    });
+  });
+  
 
 });
+
