@@ -1,5 +1,5 @@
-const acorn = require("acorn");
-const fs = require("fs");
+import acorn from 'acorn'
+import fs from 'fs';
 
 //read analyzer.js file
 const code = fs.readFileSync("src/main.js", "utf8");

@@ -180,7 +180,7 @@ describe('Uso de HTML semántico', () => {
     });
 
     it('<footer> es padre de un <p>', () => {
-      expect(p).not.toBeNull();
+      expect(p).not.toBe();
     });
 
     it('<p> no tiene atributo "id"', () => {

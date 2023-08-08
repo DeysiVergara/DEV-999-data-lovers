@@ -12,7 +12,8 @@ const style = fs.readFileSync('./src/' + stylesPath, 'utf-8');
 const { rules } = css.parse(style).stylesheet;
 
 const BOX_MODEL_ATTRIBUTES = ['width', 'height', 'margin', 'padding', 'border', 'box-sizing', 'background'];
-const FLEXBOX_ATTRIBUTES = ['flex-wrap'];
+const FLEXBOX_ATTRIBUTES = ['flex-wrap', 'flex-direction'];
+// , flex-direction, justify-, align-
 const getRulesForSelector = (selector) => {
   return rules.filter(
     (rule) =>
@@ -43,16 +44,15 @@ const fakeData = [
 document.querySelector('#root').innerHTML = renderView(fakeData);
 
 describe('CSS', () => {
-  const card = document.querySelector('.card');
-  const classLi = card.getAttribute('class');
-  const ul = document.querySelector('ul');
+  const ul = document.querySelector('#root ul');
+  const cardsLi = ul.querySelectorAll('li');
   const ulClasses = Array.from(ul.classList.values());
-  const lis = Array.from(ul.querySelectorAll('li'));
-  
+
   describe('Uso de selectores de CSS', () => {
-    it('li elementos tienen class .card', () => {
-      const liRules = getRulesForSelector(`.${classLi}`);
-      expect(liRules.length).toBeGreaterThan(0);
+    it('li elementos tienen class', () => {
+      cardsLi.forEach(item=>{
+        expect(item.getAttribute('class')).toBe('card');
+      });
     });
 
     it('Uso de flexbox', () => {
@@ -94,7 +94,6 @@ describe('CSS', () => {
     it('Se usan atributos de modelo de caja en clase CSS para <ul>', () => {
       let allRulesAttributes = [];
       ulClasses.forEach((ulClass) => {
-        console.log(ulClass);
         const ulRules = getRulesForSelector(`.${ulClass}`);
         const ulRulesAttributes = ulRules[0].declarations.map((declaration) => declaration.property);
         allRulesAttributes = allRulesAttributes.concat(ulRulesAttributes);
@@ -111,7 +110,7 @@ describe('CSS', () => {
   
     it('Se usan atributos de modelo de caja en clase CSS para <li>', () => {
       let allRulesAttributes = [];
-      lis.forEach((li) => {
+      cardsLi.forEach((li) => {
         const liClasses = Array.from(li.classList.values());
         liClasses.forEach((liClass) => {
           const liRules = getRulesForSelector(`.${liClass}`);

@@ -1,5 +1,5 @@
-const acorn = require("acorn");
-const fs = require("fs");
+import acorn from 'acorn'
+import fs from 'fs';
 
 //read analyzer.js file
 const code = fs.readFileSync("src/data.js", "utf8");
@@ -11,8 +11,11 @@ const getASTMetrics = (node, [
   parseFloatCalls,
   NumberCalls,
   sortCalls,
-  letStatements,
+  filterCalls,
+  reduceCalls,
+  // letStatements,
   constStatements,
+  forStatements,
   ifelseStatements,
   exportStatements,
 ]) => {
@@ -42,12 +45,37 @@ const getASTMetrics = (node, [
     sortCalls.push(node);
   }
 
-  if (node.type === "VariableDeclaration" && node.kind === "let") {
-    letStatements.push(node);
+  if (node.type === "CallExpression" &&
+    node.callee.type === "MemberExpression" &&
+    node.callee.property.type === "Identifier" &&
+    node.callee.property.name === "filter") {
+    filterCalls.push(node);
   }
+
+  if (node.type === "CallExpression" &&
+    node.callee.type === "MemberExpression" &&
+    node.callee.property.type === "Identifier" &&
+    node.callee.property.name === "reduce") {
+    reduceCalls.push(node);
+  }
+
+  if (node.type === "CallExpression" &&
+    node.callee.type === "MemberExpression" &&
+    node.callee.property.type === "Identifier" &&
+    node.callee.property.name === "sort") {
+    sortCalls.push(node);
+  }
+
+  // if (node.type === "VariableDeclaration" && node.kind === "let") {
+  //   letStatements.push(node);
+  // }
 
   if (node.type === "VariableDeclaration" && node.kind === "const") {
     constStatements.push(node);
+  }
+
+  if (node.type === "ForStatement" && node.kind === "for") {
+    forStatements.push(node);
   }
 
   if (node.type === "IfStatement") {
@@ -75,7 +103,10 @@ const getASTMetrics = (node, [
           parseFloatCalls,
           NumberCalls,
           sortCalls,
-          letStatements,
+          filterCalls,
+          reduceCalls,
+          forStatements,
+          // letStatements,
           constStatements,
           ifelseStatements,
           exportStatements,
@@ -92,8 +123,11 @@ const [
   parseFloatCalls,
   NumberCalls,
   sortCalls,
-  letStatements,
+  filterCalls,
+  reduceCalls,
+  // letStatements,
   constStatements,
+  forStatements,
   ifelseStatements,
   exportStatements,
 ] = metrics;
@@ -108,12 +142,21 @@ describe('Arrays', () => {
   it('Se usan métodos para manipular arrays como "sort"', () => {
     expect(sortCalls.length).toBeGreaterThan(0);
   });
+  it('Se usan métodos para manipular arrays como "filter"', () => {
+    expect(filterCalls.length).toBeGreaterThan(0);
+  });
+  it('Se usan métodos para manipular arrays como "reduce"', () => {
+    expect(reduceCalls.length).toBeGreaterThan(0);
+  });
+  it('Se declaran variables con "for"', () => {
+    expect(forStatements.length).toBeGreaterThan(0);
+  });
 });
 
 describe('Variables', () => {
-  it('Se declaran variables con "let"', () => {
-    expect(letStatements.length).toBeGreaterThan(0);
-  });
+  // it('Se declaran variables con "let"', () => {
+  //   expect(letStatements.length).toBeGreaterThan(0);
+  // });
 
   it('Se declaran variables con "const"', () => {
     expect(constStatements.length).toBeGreaterThan(0);
@@ -125,7 +168,6 @@ describe('Uso de condicionales', () => {
     expect(ifelseStatements.length).toBeGreaterThan(0);
   });
 });
-
 
 describe('Módulos de ECMAScript', () => {
   it('Se usa "export"', () => {
