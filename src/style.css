@@ -22,12 +22,12 @@ footer{
     text-align: end;
 }
 
-select[name=select-order]{
+select[name=sort-name]{
     padding: 5px;
 }
 
 
-select[name=select-type]{
+select[name=filter-name]{
     padding: 5px;
 }
 

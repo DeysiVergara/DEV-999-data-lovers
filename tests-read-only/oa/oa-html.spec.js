@@ -87,7 +87,6 @@ describe('Uso de HTML semántico', () => {
     });
 
     Array.from(select).forEach((element) => {
-      console.log(element);
       it('<select> tiene atributo "name"', () => {
         expect(element.getAttribute('name')).not.toBeNull();
       });
@@ -107,7 +106,6 @@ describe('Uso de HTML semántico', () => {
     const uls = document.querySelector('ul');
     const lis = uls.querySelector('li');
 
-
     it('La aplicación usa un <li>', () => {
       expect(uls).not.toBeNull();
     });
@@ -115,46 +113,6 @@ describe('Uso de HTML semántico', () => {
     it('La aplicación usa un <li>', () => {
       expect(lis).not.toBeNull();
     });
-
-    //   const lis = ul.querySelectorAll('li');
-
-    //   it('La aplicación usa un <ul>', () => {
-    //     expect(ul).not.toBeNull();
-    //   });
-
-    //   it('<ul> tiene atributo "class"', () => {      
-    //     expect(ul.getAttribute('class')).not.toBeNull();
-    //   });
-
-    //   it('<ul> no tiene atributo "id"', () => {      
-    //     expect(ul.getAttribute('id')).toBeNull();
-    //   });
-
-    //   it('<ul> no tiene atributo "name"', () => {
-    //     expect(ul.getAttribute('name')).toBeNull();
-    //   });
-
-    //   it('<ul> tiene 6 hijos <li>', () => {      
-    //     expect(lis.length).toBe(6);
-    //   });    
-
-    //   it('<li> tienen atributos "class"', () => { 
-    //     lis.forEach((div) => {
-    //       expect(div.getAttribute('class')).not.toBeNull();
-    //     });
-    //   });    
-
-    //   it('<li> no tienen atributos "id"', () => { 
-    //     lis.forEach((div) => {
-    //       expect(div.getAttribute('id')).toBeNull();
-    //     });
-    //   });
-
-    //   it('<li> no tienen atributos "name"', () => { 
-    //     lis.forEach((div) => {
-    //       expect(div.getAttribute('name')).toBeNull();
-    //     });
-    //   });
   });
 
   describe('<footer>', () => {

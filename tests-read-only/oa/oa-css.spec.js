@@ -82,7 +82,7 @@ describe('CSS', () => {
     });
 
 
-    it('Se usan selectores CSS de ID para <select>', () => {
+    it('Se usan selectores CSS de name para <select>', () => {
       const select = document.querySelector('select');
       const name = select.getAttribute('name');
       const selectRules = getRulesForSelector(`[name=${name}]`);

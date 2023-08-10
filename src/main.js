@@ -1,9 +1,9 @@
 import { filterData, sortData, computeStats, renderView, renderTypes } from './data.js';
-import data from './data/pokemon/pokemon.js';
+import data from './data/pokemon/pokemon.js'; // requirement that the data should be named data.js
 const root = document.getElementById('root')
 const inputUser = document.querySelector('#input-user');
-const selectOrder = document.querySelector('[name="select-order"]');
-const selectType = document.querySelector('[name="select-type"]');
+const selectOrder = document.querySelector('[name="sort-name"]');
+const selectType = document.querySelector('[name="filter-type"]');
 const estadistics = document.querySelector('#estadistics');
 
 inputUser.addEventListener('keyup', (e) => {

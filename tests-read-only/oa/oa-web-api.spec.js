@@ -49,13 +49,13 @@ const getASTMetrics = (node, metrics) => {
     metrics[5].push(node);
   }
 
-  if (node.type === "AssignmentExpression" &&
-    node.left.type === "MemberExpression" &&
-    node.left.property.type === "Identifier" &&
-    node.left.property.name === "createElement") {
+  if (node.type === "CallExpression" &&
+   node.callee.type === "MemberExpression" &&
+    node.callee.property.type === "Identifier" &&
+    (node.callee.property.name === "createElement" || node.callee.property.name === "appendChild")) {
     metrics[6].push(node);
   }
-  console.log(metrics[6]);
+
   for (const key in node) {
     /* eslint-disable-next-line no-prototype-builtins */
     if (node.hasOwnProperty(key)) {
@@ -111,8 +111,15 @@ describe('Manejo de eventos del DOM', () => {
   });
 //aqui falta ver conseguir el current
   it('Se registra un Event Listener con un e.target', () => {
+    // para probar que hay algun lugar donde se use e.target, como aqui: const arrayType = filterData(data.pokemon, 'type', e.target.value);
     expect(
-      addEventListenerCalls.some((node) => node.arguments[1].params[0].name==="e")
+      addEventListenerCalls.some((node) => node.arguments[1].body.body[0].declarations[0].init.arguments[2].object.property.name === 'target')
+    ).toBeTruthy();
+  });
+
+  it('Se registra un Event Listener con un parametro de evento', () => {
+    expect(
+      addEventListenerCalls.some((node) => node.arguments[1].params[0].name === ('e') || node.arguments[1].params[0].name === ('event'))
     ).toBeTruthy();
   });
 

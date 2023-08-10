@@ -41,7 +41,7 @@ const getASTMetrics = (node, [
   if (node.type === "CallExpression" &&
     node.callee.type === "MemberExpression" &&
     node.callee.property.type === "Identifier" &&
-    node.callee.property.name === "sort") {
+    (node.callee.property.name === "sort" || node.callee.property.name === "toSorted")) {
     sortCalls.push(node);
   }
 
@@ -144,7 +144,6 @@ describe('Arrays', () => {
     expect(reduceCalls.length).toBeGreaterThan(0);
   });
   it('Se declaran variables con "for"', () => {
-    console.log(forStatements.length);
     expect(forStatements.length).toBeGreaterThan(0);
   });
   it('Se usan métodos para manipular arrays como "foreach"', () => {

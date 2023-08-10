@@ -1,3 +1,5 @@
+// should be named data-functions.js
+
 export const filterData = (arrayData, property, condition) => {
   return arrayData.filter(elem => elem[property].includes(condition.toLowerCase()));
 };
@@ -34,17 +36,19 @@ export const getArrayUnique = (arrayData, property) => {
 // TODO: revisamos si colocamos el render view se queda aqui o si colocamos render view en un windows.
 // addeventlistener DOMContentLoaded en el main.js.
 export const renderView = (arrayData) => {
-  const lis = arrayData.map(element => `<li class= "card">
-                                          <img src=${element.img}>
-                                          <p>Name: ${element.name}</p>
-                                          <p>Num: ${element.num}</p>
-                                          <p>Type: ${element.type.join(', ')}</p>
-                                        </li>`);
-  return  `<div><ul class='wrap'>${lis.join('')}<ul></div>`;
+  const lis = arrayData.map(element => `<li class="card" data-id="${element.num}" itemscope itemtype="https://schema.org/Thing">
+    <img itemprop="image" src=${element.img}>
+    <dl>
+      <dt>Name:</dt><dd itemprop="name">${element.name}</dd>
+      <dt>Number:</dt><dd itemprop="num">${element.num}</dd>
+      <dt>Type:</dt><dd itemprop="type"> ${element.type.join(', ')}</dd>
+    </dl>
+  </li>`);
+  return  `<ul class='wrap'>${lis.join('')}<ul>`;
 }
 
-export const renderTypes = (arrayData) =>{
+export const renderTypes = (arrayData) => {
   const firstOption = `<option selected disabled>Selecciona el tipo</option>`;
-  const options = getArrayUnique(arrayData, 'type').map( type => `<option>${type}</option>`);
+  const options = getArrayUnique(arrayData, 'type').map( type => `<option value='${type}'>${type}</option>`);
   return firstOption + options.join('');
 }
