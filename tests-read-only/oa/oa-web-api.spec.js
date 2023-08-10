@@ -49,6 +49,13 @@ const getASTMetrics = (node, metrics) => {
     metrics[5].push(node);
   }
 
+  if (node.type === "AssignmentExpression" &&
+    node.left.type === "MemberExpression" &&
+    node.left.property.type === "Identifier" &&
+    node.left.property.name === "createElement") {
+    metrics[6].push(node);
+  }
+  console.log(metrics[6]);
   for (const key in node) {
     /* eslint-disable-next-line no-prototype-builtins */
     if (node.hasOwnProperty(key)) {
@@ -60,7 +67,7 @@ const getASTMetrics = (node, metrics) => {
   }
 }
 
-const metrics = [[], [], [], [], [], []];
+const metrics = [[], [], [], [], [], [],[]];
 getASTMetrics(ast, metrics);
 const [
   querySelectorCalls,
@@ -69,6 +76,7 @@ const [
   importStatements,
   textContents,
   innerHTMLs,
+  createElementCalls,
 ] = metrics;
 
 describe('Uso de selectores del DOM', () => {
@@ -90,9 +98,21 @@ describe('Manejo de eventos del DOM', () => {
     ).toBeTruthy();
   });
 
+  it('Se registra un Event Listener para el evento "change"', () => {
+    expect(
+      addEventListenerCalls.some((node) => node.arguments[0].value === "change")
+    ).toBeTruthy();
+  });
+
   it('Se registra un Event Listener para el evento "click"', () => {
     expect(
       addEventListenerCalls.some((node) => node.arguments[0].value === "click")
+    ).toBeTruthy();
+  });
+//aqui falta ver conseguir el current
+  it('Se registra un Event Listener con un e.target', () => {
+    expect(
+      addEventListenerCalls.some((node) => node.arguments[1].params[0].name==="e")
     ).toBeTruthy();
   });
 
@@ -102,6 +122,10 @@ describe('Manipulación dinámica del DOM', () => {
 
   it('Se actualiza el DOM al modificar el atributo "innerHTML" o "textContent"', () => {
     expect(textContents.length + innerHTMLs.length).toBeGreaterThan(0);
+  });
+
+  it('Existe un createElement', () => {
+    expect(createElementCalls.length).toBeGreaterThan(0);
   });
 
 });

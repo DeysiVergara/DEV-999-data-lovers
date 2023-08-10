@@ -13,9 +13,9 @@ const getASTMetrics = (node, [
   sortCalls,
   filterCalls,
   reduceCalls,
-  // letStatements,
   constStatements,
   forStatements,
+  forEachCalls,
   ifelseStatements,
   exportStatements,
 ]) => {
@@ -59,23 +59,19 @@ const getASTMetrics = (node, [
     reduceCalls.push(node);
   }
 
-  if (node.type === "CallExpression" &&
-    node.callee.type === "MemberExpression" &&
-    node.callee.property.type === "Identifier" &&
-    node.callee.property.name === "sort") {
-    sortCalls.push(node);
-  }
-
-  // if (node.type === "VariableDeclaration" && node.kind === "let") {
-  //   letStatements.push(node);
-  // }
-
   if (node.type === "VariableDeclaration" && node.kind === "const") {
     constStatements.push(node);
   }
 
-  if (node.type === "ForStatement" && node.kind === "for") {
+  if (node.type === "ForStatement") {
     forStatements.push(node);
+  }
+
+  if (node.type === "CallExpression" &&
+    node.callee.type === "MemberExpression" &&
+    node.callee.property.type === "Identifier" &&
+    node.callee.property.name === "forEach") {
+    forEachCalls.push(node);
   }
 
   if (node.type === "IfStatement") {
@@ -105,9 +101,9 @@ const getASTMetrics = (node, [
           sortCalls,
           filterCalls,
           reduceCalls,
-          forStatements,
-          // letStatements,
           constStatements,
+          forStatements,
+          forEachCalls,
           ifelseStatements,
           exportStatements,
         ]);
@@ -116,7 +112,7 @@ const getASTMetrics = (node, [
   }
 }
 
-const metrics = [[], [], [], [], [], [], [], [], [], []];
+const metrics = [[], [], [], [], [], [], [], [], [], [], []];
 getASTMetrics(ast, metrics);
 const [
   parseIntCalls,
@@ -125,13 +121,12 @@ const [
   sortCalls,
   filterCalls,
   reduceCalls,
-  // letStatements,
   constStatements,
   forStatements,
+  forEachCalls,
   ifelseStatements,
   exportStatements,
 ] = metrics;
-
 describe('Tipos de datos primitivos', () => {
   it('Se convierten valores tipo "string" a tipo "number" con "parseInt" o "parseFloat" o "Number"', () => {
     expect(parseIntCalls.length + parseFloatCalls.length + NumberCalls.length).toBeGreaterThan(0);
@@ -149,15 +144,15 @@ describe('Arrays', () => {
     expect(reduceCalls.length).toBeGreaterThan(0);
   });
   it('Se declaran variables con "for"', () => {
+    console.log(forStatements.length);
     expect(forStatements.length).toBeGreaterThan(0);
+  });
+  it('Se usan métodos para manipular arrays como "foreach"', () => {
+    expect(forEachCalls.length).toBeGreaterThan(0);
   });
 });
 
 describe('Variables', () => {
-  // it('Se declaran variables con "let"', () => {
-  //   expect(letStatements.length).toBeGreaterThan(0);
-  // });
-
   it('Se declaran variables con "const"', () => {
     expect(constStatements.length).toBeGreaterThan(0);
   });

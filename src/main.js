@@ -6,7 +6,6 @@ const selectOrder = document.querySelector('[name="select-order"]');
 const selectType = document.querySelector('[name="select-type"]');
 const estadistics = document.querySelector('#estadistics');
 
-
 inputUser.addEventListener('keyup', (e) => {
   const arrayFiltered = filterData(data.pokemon, 'name', e.target.value);
   root.innerHTML = renderView(arrayFiltered);
