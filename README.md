@@ -4,13 +4,14 @@
 
 * [1. Preámbulo](#1-preámbulo)
 * [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
+* [3. Consideraciones generales](#4-consideraciones-generales)
+* [4. Funcionalidades]
+* [8. Consideraciones técnicas](#7-consideraciones-técnicas)
 * [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Hacker edition](#6-hacker-edition)
-* [7. Consideraciones técnicas](#7-consideraciones-técnicas)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
-* [9. Checklist](#9-checklist)
+* [6. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
+* [7. Hacker edition](#6-hacker-edition)
+* [10. Consideraciones para pedir tu Project Feedback](#9-checklist)
+* [9. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
 
 ***
 
@@ -84,6 +85,24 @@ Estos son datos que te proponemos:
 El objetivo principal de este proyecto es que aprendas a diseñar y construir una
 interfaz web donde se pueda visualizar y manipular data, entendiendo lo que el
 usuario necesita.
+
+## 3. Funcionalidades
+
+La pagina que constuyas para visualizar la data debe tener las funcionalidades siguientes :
+
+- La aplicación debe permitir la usuaria ver los items de la data en una visualizacion de tarjetas. Las tarjetas
+  deben resaltar los valores de propiedades de la data que interesaria la usuaria ver (ej...
+- La data en la tarjetas esta estructurada semanticamente usando attributos itemprop
+
+- La aplicación debe permitir la usuaria visualizar data que esta filterizado, ordenado. etc atravez su interfaz:
+  * un control select para filtrar ... con <label> semantica y <name> que seria la propiedad que vas a filtrar ... los opciones tiene `value` de la propiedad. 
+  * un control select para ordenar, ... con <label> semantica y <name> de la propiedad que quieres ordenar puede ser un select simple para ordener ascendente o descendente de algun propiedad,
+  o un control select para hacer sort con opciones de propiedad con un control radio para decidir ascendente o descendente
+  * un boton para limpiar / establecer el estado original
+  * opcional busqueada
+  * tbd compute stats
+
+Wireframe tbd
 
 ## 3. Objetivos de aprendizaje
 
@@ -600,7 +619,7 @@ import data from './data/lol/lol.js';
 
 Y ahora tendríamos la variable `data` disponible en el script `src/main.js`.
 
-### `src/data.js`
+### `src/dataFunctions.js`
 
 El corazón de este proyecto es la manipulación de datos a través de arreglos
 y objetos.
@@ -608,8 +627,8 @@ y objetos.
 Te recomendamos que este archivo contenga toda la funcionalidad que corresponda
 a obtener, procesar y manipular datos (tus funciones). Por ejemplo:
 
-* `filterData(data, condition)`: esta función `filter` o filtrar recibiría la
-  data, y nos retornaría aquellos datos que sí cumplan con la condición.
+* `filterData(data, filterBy, value)`: esta función `filter` o filtrar recibiría la
+  data, ... y nos retornaría aquellos datos que sí cumplan con la condición.
 
 * `sortData(data, sortBy, sortOrder)`: esta función `sort` u ordenar
   recibe tres parámetros.
@@ -641,7 +660,7 @@ mientras que el `.json` está ahí para opcionalmente cargar la data de forma
 asíncrona con [`fetch()`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API)
 (ver sección de [_Parte Opcional_](#6-hacker-edition)).
 
-### `test/data.spec.js`
+### `test/dataFunctions.spec.js`
 
 Tendrás también que completar las pruebas unitarias de las funciones
 implementadas en el archivo `data.js`.
