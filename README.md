@@ -288,6 +288,141 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   interfaz será desplegada usando [GitHub Pages](https://pages.github.com/).
 
 ## 5. Criterios de aceptación mínimos del proyecto
+- **Uso de HTML semántico**
+  - [ ]<h1> en head.
+  - [ ]<h2> en main.
+  - [ ]<select> con <label>.
+  - [ ]<ul> o <ol> para lista de los items.
+### CSS
+
+- **Uso de selectores de CSS**
+  - [ ] Los elementos li tienen una class que se llama card.
+  - [ ] Uso de flexbox en sentido row y column
+  - [ ] Uso de flexbox para el container de los cards
+  - [ ] Uso de flexbox para bar de UI inputs
+
+  ### Web APIs
+
+* **Uso de selectores del DOM**
+  - [ ] La aplicación usa el
+  [`selector del DOM querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector). (querySelector para elegir select con name (selector attributo)).
+
+  - [ ] La aplicación usa el
+  [`selector del DOM getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+  
+* **Manejo de eventos del DOM (listeners, propagación, delegación)**
+  - [ ]addEventListener con uso de e.target o e.currentTarget.
+  - [ ] La aplicación registra un
+  [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
+  para escuchar el evento `keyup` del `<textarea>` para actualizar la búsqueda.
+
+  - [ ] La aplicación registra un
+  [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
+  para escuchar el evento `click` del `<button>` para las estadísticas?.
+
+  - [ ] La aplicación registra un
+  [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
+  para escuchar el evento `change` del `<select>` de ordenamiento y filtrado.
+
+* **Manipulación dinámica del DOM**
+  - [ ] La aplicación actualiza el atributo
+  [`innerHTML`](https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML).
+
+  - [ ] La aplicacion usa createElement y appendChild o template strings.
+
+### JavaScript
+
+  * **Variables (declaración, asignación, ámbito)**
+    - [ ] **Diferenciar entre tipos de datos primitivos y no primitivos**
+    - [ ] La aplicación declara variables con
+    [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+    y
+    [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const).
+
+    - [ ] La aplicación NO declara variables con  `var`.
+
+
+  * **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
+
+    - [ ] La aplicación usa el statement
+    [`if..else`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else)
+    para evaluar condiciones.
+
+  * **Uso de bucles/ciclos (while, for, for..of)**
+
+    - [ ] La aplicación usa el statement
+    [`for`] o [`foreach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for)
+    para crear un bucle.
+
+  * **Funciones (params, args, return)**
+
+    - [ ] En el archivo data.js contiene el método sort o tosorted para ordenar elementos de la data.
+
+    - [ ] En el archivo data.js contiene el método filter para filtrar elementos de la data.
+
+    - [ ] En el archivo data.js contiene el método reduce para obtener estadisticas.
+
+    - **Arrays (arreglos)**
+
+    - [ ] [Arreglos](https://curriculum.laboratoria.la/es/topics/javascript/04-arrays)
+      * [Array - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/)
+      * [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+      * [Array.prototype.forEach() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+      * [Array.prototype.map() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+      * [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+      * [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+
+  * **Objetos**
+    - [ ]notacion de punto
+
+    - [ ] notacion de brackets
+
+  * **Pruebas unitarias (unit tests)**
+
+    - [ ] Se pasan todas las pruebas unitarias.
+
+  * **Módulos de ECMAScript (ES Modules)**
+
+    - [ ] La aplicación usan
+    [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+    y
+    [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+    para importar y exportar valores desde un modulo JavaScript.
+
+  - [ ] **Uso de linter (ESLINT)**
+
+  - [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
+
+  - [ ] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
+
+### Control de Versiones (Git y GitHub)
+
+  - [ ] **Git: Instalación y configuración**
+
+  - [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
+
+  - [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
+
+  - [ ] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
+
+  - [ ] **GitHub: Despliegue con GitHub Pages**
+
+  - [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
+
+### Centrado en el usuario
+
+  - [ ] **Diseñar y desarrollar un producto o servicio poniendo a las usuarias en el centro**
+
+### Diseño de producto
+
+  - [ ] **Crear prototipos de alta fidelidad que incluyan interacciones**
+
+  - [ ] **Seguir los principios básicos de diseño visual**
+
+### Investigación
+
+  - [ ] **Planear y ejecutar testeos de usabilidad de prototipos en distintos niveles de fidelidad**
+
 
 Los criterios para considerar que has completado este proyecto son:
 
