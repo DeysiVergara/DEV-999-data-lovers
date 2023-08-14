@@ -143,8 +143,8 @@ describe('Arrays', () => {
   it('Se usan métodos para manipular arrays como "reduce"', () => {
     expect(reduceCalls.length).toBeGreaterThan(0);
   });
-  it('Se declaran variables con "for"', () => {
-    expect(forStatements.length).toBeGreaterThan(0);
+  it('Se prefiere el uso de forEach sobre for', () => {
+    expect(forStatements.length<forEachCalls.length).toBe(true);
   });
   it('Se usan métodos para manipular arrays como "foreach"', () => {
     expect(forEachCalls.length).toBeGreaterThan(0);
