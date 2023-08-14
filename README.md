@@ -4,14 +4,14 @@
 
 * [1. Preámbulo](#1-preámbulo)
 * [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Consideraciones generales](#4-consideraciones-generales)
-* [4. Funcionalidades]
-* [8. Consideraciones técnicas](#7-consideraciones-técnicas)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [7. Hacker edition](#6-hacker-edition)
-* [10. Consideraciones para pedir tu Project Feedback](#9-checklist)
-* [9. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+* [3. Consideraciones generales](#3-consideraciones-generales)
+* [4. Funcionalidades](#4-funcionaalidades)
+* [5. Consideraciones técnicas](#5-consideraciones-técnicas)
+* [6. Criterios de aceptación mínimos del proyecto](#6-criterios-de-aceptación-mínimos-del-proyecto)
+* [7. Objetivos de aprendizaje](#7-objetivos-de-aprendizaje)
+* [8. Hacker edition](#6-hacker-edition)
+* [9. Consideraciones para pedir tu Project Feedback](#9-consideractiones-para-pedir-tu-project-feedback)
+* [10. Pistas, tips y lecturas complementarias](#10-pistas-tips-y-lecturas-complementarias)
 
 ***
 
@@ -88,19 +88,31 @@ usuario necesita.
 
 ## 3. Funcionalidades
 
-La pagina que constuyas para visualizar la data debe tener las funcionalidades siguientes :
+La pagina que construyas para visualizar la data debe tener las funcionalidades siguientes:
 
-- La aplicación debe permitir la usuaria ver los items de la data en una visualizacion de tarjetas. Las tarjetas
-  deben resaltar los valores de propiedades de la data que interesaria la usuaria ver (ej...
-- La data en la tarjetas esta estructurada semanticamente usando attributos itemprop
-
-- La aplicación debe permitir la usuaria visualizar data que esta filterizado, ordenado. etc atravez su interfaz:
-  * un control select para filtrar ... con <label> semantica y <name> que seria la propiedad que vas a filtrar ... los opciones tiene `value` de la propiedad. 
-  * un control select para ordenar, ... con <label> semantica y <name> de la propiedad que quieres ordenar puede ser un select simple para ordener ascendente o descendente de algun propiedad,
-  o un control select para hacer sort con opciones de propiedad con un control radio para decidir ascendente o descendente
-  * un boton para limpiar / establecer el estado original
-  * opcional busqueada
-  * tbd compute stats
+- La aplicación debe permitir la usuaria ver los items de la data en una visualización de tarjetas (o tabla o lista?). 
+- Las tarjetas deben resaltar los valores de propiedades de la data que interesaría la usuaria ver. Por 
+  ejemplo: nombre, fecha. Si vas a filtrar o ordenar por una propiedad, la tarjeta tiene que mostrar este
+  valor al usuario.
+- La data en la tarjetas tiene estructura semantica usando los attributos [`itemprop`](https://developer.mozilla.org/en-US/ docs/Web/HTML/Global_attributes/itemprop) y `itemscope`. 
+- La aplicación debe permitir la usuaria filtrar e ordenar la data con su interfaz:
+  * un control para filtrar la data. Un [`select`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)
+  con attributo `name` que es el nombre de la propiedad por la que filtrará.
+  (Ejemplo: si vas a filtrar por "type" seria `name="type"`). Los opciones de `select` tendrán
+  un `value` de la propiedad (Ejemplo: `value="fire"`). 
+  * un control para ordenar la data. Puede ser un select con attributo `name` de la propiedad por la que ordenará,
+  y dos opciones con valor `asc` y `desc` respectivamente. Una alternativa mas complejo, podrias implementar
+  un select que contiene varios opciones con un `value` de un nombre de propiedad distinta de la data. Este
+  `value` puedes usar para ordenar la data en conjunto con un control acostado con valores `asc` y `desc`.
+  * un `button` para limpiar los filtros y sort y establecer de nuevo la vista original
+  * un <label> semantica para cada control
+  * opcional - un `input` type `search` para hacer una busqueada
+- La data visualizada debe mostrar una data computada. Puede ser un propiedad computada de cada item, como
+  propiedad adicional (Ejemplo: Fuerza total) o unas estadisticas del dataset completo.
+- Los operaciones de filtrar, ordenar, etc. no debe recargar la pagina, pero agregar el contenido en una manera
+  dinámica via javascript
+- La aplicación será _responsive_, es decir, debe visualizarse sin problemas desde distintos
+  tamaños de pantallas: móviles, tablets y desktops.
 
 Wireframe tbd
 
@@ -307,16 +319,23 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   interfaz será desplegada usando [GitHub Pages](https://pages.github.com/).
 
 ## 5. Criterios de aceptación mínimos del proyecto
-- **Uso de HTML semántico**
-  - [ ]<h1> en head.
-  - [ ]<h2> en main.
-  - [ ]<select> con <label>.
-  - [ ]<ul> o <ol> para lista de los items.
+
+Con cada Objetivo de Aprendizaje, evaluamos qiue cumplen algunos criterios.
+
+### HTML
+
+* **Uso de HTML semántico**
+  - [ ] `<header>` con `<h1>`
+  - [ ] `<main>` con `<h2>`
+  - [ ] `<select>` con `<label>`
+  - [ ] `<ul>` o `<ol>` para lista de los items
+  - [ ] hijos de `<li>` usan attributos `itemprop`
+
 ### CSS
 
-- **Uso de selectores de CSS**
-  - [ ] Los elementos li tienen una class que se llama card.
-  - [ ] Uso de flexbox en sentido row y column
+* **Uso de selectores de CSS**
+  - [ ] Los elementos `<li>` tienen una class que se llama `card`
+  - [ ] Uso de flexbox en sentido `row` y `column`
   - [ ] Uso de flexbox para el container de los cards
   - [ ] Uso de flexbox para bar de UI inputs
 
@@ -324,85 +343,64 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 * **Uso de selectores del DOM**
   - [ ] La aplicación usa el
-  [`selector del DOM querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector). (querySelector para elegir select con name (selector attributo)).
-
-  - [ ] La aplicación usa el
-  [`selector del DOM getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+  [`selector del DOM querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
   
 * **Manejo de eventos del DOM (listeners, propagación, delegación)**
-  - [ ]addEventListener con uso de e.target o e.currentTarget.
-  - [ ] La aplicación registra un
-  [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
-  para escuchar el evento `keyup` del `<textarea>` para actualizar la búsqueda.
-
-  - [ ] La aplicación registra un
-  [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
-  para escuchar el evento `click` del `<button>` para las estadísticas?.
-
-  - [ ] La aplicación registra un
-  [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
-  para escuchar el evento `change` del `<select>` de ordenamiento y filtrado.
+  - [ ] `addEventListener` con callback que tiene parámetro de `event`, lo que permite el uso de `event.target`
+  o `event.currentTarget`
+  - [ ] La aplicación registra 
+  [Event Listeners](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
+  para escuchar `click`, `change`, `keyup` depende en el evento que quiere escuchar
 
 * **Manipulación dinámica del DOM**
   - [ ] La aplicación actualiza el atributo
   [`innerHTML`](https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML).
-
-  - [ ] La aplicacion usa createElement y appendChild o template strings.
+  - [ ] La aplicación usa `createElement` y `appendChild` o template strings para crear elementos
 
 ### JavaScript
 
   * **Variables (declaración, asignación, ámbito)**
-    - [ ] **Diferenciar entre tipos de datos primitivos y no primitivos**
     - [ ] La aplicación declara variables con
     [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
     y
-    [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const).
-
-    - [ ] La aplicación NO declara variables con  `var`.
-
+    [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+    en manera adecuada
 
   * **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
-
     - [ ] La aplicación usa el statement
     [`if..else`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else)
     para evaluar condiciones.
 
   * **Uso de bucles/ciclos (while, for, for..of)**
-
     - [ ] La aplicación usa el statement
-    [`for`] o [`foreach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for)
-    para crear un bucle.
+    [`for`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) o [`forEach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) para iterar
 
   * **Funciones (params, args, return)**
+    En el archivo `dataFunctions.js` define:
+    - [ ] una función `sortBy` que tiene 3 parámetros (`data`, `sortBy`, `sortOrder`) y devuelva el arreglo ordenado
+    - [ ] una función `filterBy` que tiene 3 parámetros (`data`, `filterBy`, `value`) y devuelva el arreglo filtrado
+    - [ ] una función `computeStats` que tiene al menos un parámetro (`data`) y devuelva un valor computado
 
-    - [ ] En el archivo data.js contiene el método sort o tosorted para ordenar elementos de la data.
+  * **Arrays (arreglos)**
 
-    - [ ] En el archivo data.js contiene el método filter para filtrar elementos de la data.
-
-    - [ ] En el archivo data.js contiene el método reduce para obtener estadisticas.
-
-    - **Arrays (arreglos)**
-
-    - [ ] [Arreglos](https://curriculum.laboratoria.la/es/topics/javascript/04-arrays)
-      * [Array - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/)
-      * [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-      * [Array.prototype.forEach() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-      * [Array.prototype.map() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-      * [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
-      * [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+    - [ ] Uso de [Arreglos](https://curriculum.laboratoria.la/es/topics/javascript/04-arrays)
+    - [ ] Uso de [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) o [Array.prototype.toSorted - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted)
+    - [ ] Uso de [Array.prototype.forEach() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+    - [ ] Uso de [Array.prototype.map() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+    - [ ] Uso de [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+    - [ ] Uso de [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
   * **Objetos**
-    - [ ]notacion de punto
-
-    - [ ] notacion de brackets
+    - [ ] Uso de notación de punto para [acceder propiedades](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors)
+    - [ ] Uso de notación de brackets para [acceder propiedades](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors)
 
   * **Pruebas unitarias (unit tests)**
 
-    - [ ] Se pasan todas las pruebas unitarias.
+    - [ ] Se pasan todas las pruebas unitarias que escribas
 
   * **Módulos de ECMAScript (ES Modules)**
 
-    - [ ] La aplicación usan
+    - [ ] La aplicación usa
     [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
     y
     [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
@@ -443,7 +441,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   - [ ] **Planear y ejecutar testeos de usabilidad de prototipos en distintos niveles de fidelidad**
 
 
-Los criterios para considerar que has completado este proyecto son:
+Otros criterios para considerar que has completado este proyecto son:
 
 ### Definición del producto
 
@@ -497,16 +495,7 @@ mejoraste en tu propuesta final.
 
 Luego de diseñar tu interfaz de usuario deberás trabajar en su implementación.
 **No** es necesario que construyas la interfaz exactamente como la diseñaste.
-Tu tiempo de hacking es escaso, así que deberás priorizar
-
-Como mínimo, tu implementación debe:
-
-1. Mostrar la data en una interfaz: puede ser un card, una tabla, una lista,
-   etc.
-2. Permitir al usuario interactuar para obtener la infomación que necesita.
-3. Ser _responsive_, es decir, debe visualizarse sin problemas desde distintos
-   tamaños de pantallas: móviles, tablets y desktops.
-4. Que la interfaz siga los fundamentos de _visual design_.
+Tu tiempo de hacking es escaso, así que deberás priorizar.
 
 ### Pruebas unitarias
 
@@ -563,26 +552,16 @@ como toda la configuración de dependencias:
 |  |  |  ├── pokemon.js
 |  |  |  ├── pokemon.json
 |  |  |  └── README.md
-|  |  └── rickandmorty
-|  |  |  ├── rickandmorty.js
-|  |  |  ├── rickandmorty.json
-|  |  |  └── README.md
-|  |  └── athletes
-|  |  |  ├── athletes.js
-|  |  |  ├── athletes.json
-|  |  |  └── README.md
-|  |  └── ghibli
-|  |  |  ├── ghibli.js
-|  |  |  ├── ghibli.json
-|  |  |  └── README.md
-|  ├── data.js
+|  |  └── // otras carpetas de data
+|  ├── dataFunctions.js
+   ├── viewFunctions.js
 |  ├── index.html
 |  ├── main.js
 |  └── style.css
 └── test
    └── data.spec.js
+└── tests-read-only
 
-directory: 7 file: 20
 ```
 
 ### `src/index.html`
@@ -642,9 +621,6 @@ a obtener, procesar y manipular datos (tus funciones). Por ejemplo:
   cálculos estadísticos básicos para ser mostrados de acuerdo a la data
   proporcionada.
 
-Estos nombres de funciones y de parámetros son solamente referenciales, lo que
-decidas depende de tu propia implementación.
-
 Estas funciones deben ser [_puras_](https://medium.com/laboratoria-developers/introducci%C3%B3n-a-la-programaci%C3%B3n-funcional-en-javascript-parte-2-funciones-puras-b99e08c2895d)
 e independientes del DOM. Estas funciones serán después usadas desde el archivo
 `src/main.js`, al cargar la página, y cada vez que el usuario interactúe (click,
@@ -663,7 +639,7 @@ asíncrona con [`fetch()`](https://developer.mozilla.org/es/docs/Web/API/Fetch_A
 ### `test/dataFunctions.spec.js`
 
 Tendrás también que completar las pruebas unitarias de las funciones
-implementadas en el archivo `data.js`.
+implementadas en el archivo `dataFunctions.js`.
 
 ## 8. Pistas, tips y lecturas complementarias
 
@@ -753,23 +729,23 @@ Cuando ya estés lista para codear, te sugerimos empezar de esta manera:
 * [Cómo dividir H.U.](https://www.youtube.com/watch?v=Ueq786iZ30I&t=341s)
 * [Guía para Data Lovers](https://docs.google.com/presentation/d/e/2PACX-1vQhx9D36NjpH-Daea-ITPUDUzNL8ZiNAprq_7b5PSUrfutk45tEtaOLz2lmd8f54_5jX1hypDM8f8SM/pub?start=false&loop=false&delayms=60000)
 
-## 9. Checklist
+## 9. Consideraciones para pedir tu Project Feedback
 
-* [ ] Usa VanillaJS.
+* [ ] Usa VanillaJS
 * [ ] Pasa linter (`npm run pretest`)
-* [ ] Pasa tests (`npm test`)
-* [ ] Pruebas unitarias cubren un mínimo del 70% de statements, functions y
-  lines y branches.
-* [ ] Incluye _Definición del producto_ clara e informativa en `README.md`.
-* [ ] Incluye historias de usuario en `README.md`.
+* [ ] Pasa los tests end to end (`npm run test:e2e`)
+* [ ] Pasa % de los tests de Objetivos de Aprendizaje (`npm run test:oas`)
+* [ ] Pasa pruebas unitarias (`npm test`) que cubren un mínimo del 70% de statements,
+  functions, lines y branches
+* [ ] Incluye _Definición del producto_ clara e informativa en `README.md`
+* [ ] Incluye historias de usuario en `README.md`
 * [ ] Incluye _sketch_ de la solución (prototipo de baja fidelidad) en
-  `README.md`.
+  `README.md`
 * [ ] Incluye _Diseño de la Interfaz de Usuario_ (prototipo de alta fidelidad)
-  en `README.md`.
-* [ ] Incluye link a Zeplin en `README.md`.
+  en `README.md`
 * [ ] Incluye el listado de problemas que detectaste a través de tests de
-  usabilidad en el `README.md`.
-* [ ] UI: Muestra lista y/o tabla con datos y/o indicadores.
-* [ ] UI: Permite ordenar data por uno o más campos (asc y desc).
-* [ ] UI: Permite filtrar data en base a una condición.
-* [ ] UI: Es _responsive_.
+  usabilidad en el `README.md`ß
+* [ ] UI: Muestra lista y/o tabla con datos y/o indicadores
+* [ ] UI: Permite ordenar data por uno o más campos (asc y desc)
+* [ ] UI: Permite filtrar data en base a una condición
+* [ ] UI: Es _responsive_
