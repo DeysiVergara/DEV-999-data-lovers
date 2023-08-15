@@ -496,7 +496,7 @@ _filtrar_ y _ordenar_ la data, así como _calcular_ estadísticas.
 
 Tus _pruebas unitarias_ deben dar una cobertura del 70% de _statements_
 (_sentencias_), _functions_ (_funciones_), _lines_ (_líneas_), y _branches_
-(_ramas_) del archivo `src/data-funciones.js` que contenga tus funciones y está detallado
+(_ramas_) del archivo `src/dataFunctions.js` que contenga tus funciones y está detallado
 en la sección de [Consideraciones técnicas](#srcdatajs).
 
 ## 6. Hacker edition
