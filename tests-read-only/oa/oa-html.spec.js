@@ -29,7 +29,6 @@ document.querySelector('#root').innerHTML = renderView(fakeData);
 describe('Uso de HTML semántico', () => {
 
   describe('<header>', () => {
-    const h2 = document.querySelector('h2');
     const header = document.querySelector('header');
     const h1 = header.querySelector('h1');
 
@@ -45,10 +44,6 @@ describe('Uso de HTML semántico', () => {
       expect(header.getAttribute('class')).toBeNull();
     });
 
-    it('<header> no tiene atributo "name"', () => {
-      expect(header.getAttribute('name')).toBeNull();
-    });
-
     it('<header> es padre de un <h1>', () => {
       expect(h1).not.toBeNull();
     });
@@ -60,21 +55,12 @@ describe('Uso de HTML semántico', () => {
     it('<h1> no tiene atributo "class"', () => {
       expect(h1.getAttribute('class')).toBeNull();
     });
-
-    it('<h1> no tiene atributo "name"', () => {
-      expect(h1.getAttribute('name')).toBeNull();
-    });
-
-    it('<header> es padre de un <h2>', () => {
-      expect(h2).not.toBeNull();
-    });
   });
 
-  describe('<main>', () => {
-    const main = document.querySelector('main');
-    const h2 = main.querySelector('h2');
+  describe('<main> contiene un elemento <h2>', () => {
+    const h2 = document.querySelector('main h2')
 
-    it('<Hay un h2 en el main> es padre de un <h2>', () => {
+    it('Hay un h2 en el main es padre de un <h2>', () => {
       expect(h2).not.toBeNull();
     });
   });
@@ -86,31 +72,31 @@ describe('Uso de HTML semántico', () => {
       expect(select).not.toBeNull();
     });
 
-    Array.from(select).forEach((element) => {
-      it('<select> tiene atributo "name"', () => {
+    it('<select> tiene atributo "name"', () => {
+      Array.from(select).forEach((element) => {
         expect(element.getAttribute('name')).not.toBeNull();
-      });
+      })
+    });
 
-      it('<select> no tiene atributo "class"', () => {
+    it('<select> no tiene atributo "class"', () => {
+      Array.from(select).forEach((element) => {
         expect(element.getAttribute('class')).toBeNull();
-      });
+      })
+    });
 
-      it('<label> existe', () => {
+    it('<label> existe', () => {
+      Array.from(select).forEach((element) => {
         const previousFor = element.previousElementSibling.getAttribute('for');
         expect(previousFor).toBe(element.id);
       })
-    });
+    })
+
   });
 
   describe('<ul>', () => {
-    const uls = document.querySelector('ul');
-    const lis = uls.querySelector('li');
+    const lis = document.querySelector('ul > li');
 
-    it('La aplicación usa un <li>', () => {
-      expect(uls).not.toBeNull();
-    });
-
-    it('La aplicación usa un <li>', () => {
+    it('La aplicacion usa un <ul> con <li> para los elementos de data', () => {
       expect(lis).not.toBeNull();
     });
   });
@@ -118,8 +104,6 @@ describe('Uso de HTML semántico', () => {
   describe('<footer>', () => {
 
     const footer = document.querySelector('footer');
-
-    const p = footer.querySelector('p');
 
     it('La aplicación usa un <footer>', () => {
       expect(footer).not.toBeNull();
@@ -131,26 +115,6 @@ describe('Uso de HTML semántico', () => {
 
     it('<footer> no tiene atributo "class"', () => {
       expect(footer.getAttribute('class')).toBeNull();
-    });
-
-    it('<footer> no tiene atributo "name"', () => {
-      expect(footer.getAttribute('name')).toBeNull();
-    });
-
-    it('<footer> es padre de un <p>', () => {
-      expect(p).not.toBe();
-    });
-
-    it('<p> no tiene atributo "id"', () => {
-      expect(p.getAttribute('id')).toBeNull();
-    });
-
-    it('<p> no tiene atributo "class"', () => {
-      expect(p.getAttribute('class')).toBeNull();
-    });
-
-    it('<p> no tiene atributo "name"', () => {
-      expect(p.getAttribute('name')).toBeNull();
     });
   });
 

@@ -22,14 +22,10 @@ footer{
     text-align: end;
 }
 
-select[name=sort-name]{
+select{
     padding: 5px;
 }
 
-
-select[name=filter-name]{
-    padding: 5px;
-}
 
 .flexNav{
     display: flex;

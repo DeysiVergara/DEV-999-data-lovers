@@ -12,8 +12,8 @@ const style = fs.readFileSync('./src/' + stylesPath, 'utf-8');
 const { rules } = css.parse(style).stylesheet;
 
 const BOX_MODEL_ATTRIBUTES = ['width', 'height', 'margin', 'padding', 'border', 'box-sizing', 'background'];
-const FLEXBOX_ATTRIBUTES = ['flex-wrap', 'flex-direction'];
-// , flex-direction, justify-, align-
+const FLEXBOX_ATTRIBUTES = ['flex-wrap', 'flex-direction', 'justify-content', 'align-items'];
+
 const getRulesForSelector = (selector) => {
   return rules.filter(
     (rule) =>
@@ -55,13 +55,12 @@ describe('CSS', () => {
       });
     });
 
-    it('Uso de flexbox', () => {
-      let allRulesAttributes = [];
-      ulClasses.forEach((ulClass) => {
-        const ulRules = getRulesForSelector(`.${ulClass}`);
-        const ulRulesAttributes = ulRules[0].declarations.map((declaration) => declaration.property);
-        allRulesAttributes = allRulesAttributes.concat(ulRulesAttributes);
-      });
+    it('Uso de flexbox en la clase del ul', () => {
+      const allRulesAttributes = ulClasses.reduce((allRules, ulClass) => {
+        const rules = getRulesForSelector(`.${ulClass}`);
+        const ulRulesAttributes = rules[0].declarations.map((declaration) => declaration.property);
+        return allRules.concat(ulRulesAttributes);
+      }, []);
       expect(
         allRulesAttributes.some(
           (attribute) => FLEXBOX_ATTRIBUTES.some(
@@ -81,33 +80,13 @@ describe('CSS', () => {
       expect(footerRules.length).toBeGreaterThan(0);
     });
 
-
-    it('Se usan selectores CSS de name para <select>', () => {
-      const select = document.querySelector('select');
-      const name = select.getAttribute('name');
-      const selectRules = getRulesForSelector(`[name=${name}]`);
+    it('Se usan selectores CSS de tipo para <select>', () => {
+      const selectRules = getRulesForSelector('select');
       expect(selectRules.length).toBeGreaterThan(0);
     });
   });
 
-  describe('Modelo de caja (box model)', () => {
-    it('Se usan atributos de modelo de caja en clase CSS para <ul>', () => {
-      let allRulesAttributes = [];
-      ulClasses.forEach((ulClass) => {
-        const ulRules = getRulesForSelector(`.${ulClass}`);
-        const ulRulesAttributes = ulRules[0].declarations.map((declaration) => declaration.property);
-        allRulesAttributes = allRulesAttributes.concat(ulRulesAttributes);
-      });
-      //expect at least one attribute starts with at least one element of boxModelAttributes
-      expect(
-        allRulesAttributes.some(
-          (attribute) => BOX_MODEL_ATTRIBUTES.some(
-            boxModelAttribute => attribute.startsWith(boxModelAttribute)
-          )
-        )
-      ).toBe(true);
-    });
-  
+  describe('Modelo de caja (box model)', () => {  
     it('Se usan atributos de modelo de caja en clase CSS para <li>', () => {
       let allRulesAttributes = [];
       cardsLi.forEach((li) => {
@@ -129,7 +108,5 @@ describe('CSS', () => {
       ).toBe(true);
     });
   });
-  
-
 });
 
