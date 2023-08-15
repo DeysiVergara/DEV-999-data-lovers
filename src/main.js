@@ -1,4 +1,4 @@
-import { filterData, sortData, computeStats, renderView, renderTypes } from './data-funciones.js';
+import { filterData, sortData, computeStats, renderView, renderTypes } from './dataFunctions.js';
 import data from './data/pokemon/pokemon.js';
 const root = document.getElementById('root')
 const inputUser = document.querySelector('#input-user');

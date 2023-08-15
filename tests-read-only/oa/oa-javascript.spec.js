@@ -2,7 +2,7 @@ const acorn = require("acorn");
 const fs = require("fs");
 
 //read analyzer.js file
-const code = fs.readFileSync("src/data-funciones.js", "utf8");
+const code = fs.readFileSync("src/dataFunctions.js", "utf8");
 //parse the file
 const ast = acorn.parse(code, { ecmaVersion: 2020, sourceType: "module" });
 
