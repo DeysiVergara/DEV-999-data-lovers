@@ -326,14 +326,15 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   - [ ] La aplicación usa el
   [`selector del DOM querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector). (querySelector para elegir select con name (selector attributo)).
 
-  - [ ] La aplicación usa el
-  [`selector del DOM getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+    - [ ] La aplicación usa el
+  [`selector del DOM querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector). (querySelector para elegir todas las cards)).
+
   
 * **Manejo de eventos del DOM (listeners, propagación, delegación)**
   - [ ]addEventListener con uso de e.target o e.currentTarget.
   - [ ] La aplicación registra un
   [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
-  para escuchar el evento `keyup` del `<textarea>` para actualizar la búsqueda.
+  para escuchar el evento `keyup` del `<input>` para actualizar la búsqueda.
 
   - [ ] La aplicación registra un
   [Event Listener](https://developer.mozilla.org/en/docs/Web/API/EventTarget/addEventListener)
@@ -375,11 +376,11 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
   * **Funciones (params, args, return)**
 
-    - [ ] En el archivo data.js contiene el método sort o tosorted para ordenar elementos de la data.
+    - [ ] En el archivo data-funciones.js con tres parametros (array, property, condition) contiene el método sort o toS orted para ordenar elementos de la data.
 
-    - [ ] En el archivo data.js contiene el método filter para filtrar elementos de la data.
+    - [ ] En el archivo data-funciones.js  con tres parametros (array, property, condition) contiene el método filter para filtrar elementos de la data.
 
-    - [ ] En el archivo data.js contiene el método reduce para obtener estadisticas.
+    - [ ] En el archivo data-funciones.js contiene el método reduce para obtener estadisticas.
 
     - **Arrays (arreglos)**
 
@@ -391,14 +392,10 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
       * [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
       * [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
-  * **Objetos**
-    - [ ]notacion de punto
-
-    - [ ] notacion de brackets
 
   * **Pruebas unitarias (unit tests)**
 
-    - [ ] Se pasan todas las pruebas unitarias.
+    - [ ] Se escriben pruebas unitarias para los funciones en data-funciones.js con 70% etc...
 
   * **Módulos de ECMAScript (ES Modules)**
 
@@ -408,17 +405,8 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
     [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
     para importar y exportar valores desde un modulo JavaScript.
 
-  - [ ] **Uso de linter (ESLINT)**
-
-  - [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
-
-  - [ ] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
 
 ### Control de Versiones (Git y GitHub)
-
-  - [ ] **Git: Instalación y configuración**
-
-  - [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
 
   - [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
 
@@ -516,7 +504,7 @@ _filtrar_ y _ordenar_ la data, así como _calcular_ estadísticas.
 
 Tus _pruebas unitarias_ deben dar una cobertura del 70% de _statements_
 (_sentencias_), _functions_ (_funciones_), _lines_ (_líneas_), y _branches_
-(_ramas_) del archivo `src/data.js` que contenga tus funciones y está detallado
+(_ramas_) del archivo `src/data-funciones.js` que contenga tus funciones y está detallado
 en la sección de [Consideraciones técnicas](#srcdatajs).
 
 ## 6. Hacker edition
@@ -575,7 +563,7 @@ como toda la configuración de dependencias:
 |  |  |  ├── ghibli.js
 |  |  |  ├── ghibli.json
 |  |  |  └── README.md
-|  ├── data.js
+|  ├── data-funciones.js
 |  ├── index.html
 |  ├── main.js
 |  └── style.css
@@ -663,7 +651,7 @@ asíncrona con [`fetch()`](https://developer.mozilla.org/es/docs/Web/API/Fetch_A
 ### `test/dataFunctions.spec.js`
 
 Tendrás también que completar las pruebas unitarias de las funciones
-implementadas en el archivo `data.js`.
+implementadas en el archivo `data-funciones.js`.
 
 ## 8. Pistas, tips y lecturas complementarias
 
