@@ -325,10 +325,6 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 * **Uso de selectores del DOM**
   - [ ] La aplicación usa el
   [`selector del DOM querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector). (querySelector para elegir select con name (selector attributo)).
-
-    - [ ] La aplicación usa el
-  [`selector del DOM querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector). (querySelector para elegir todas las cards)).
-
   
 * **Manejo de eventos del DOM (listeners, propagación, delegación)**
   - [ ]addEventListener con uso de e.target o e.currentTarget.
