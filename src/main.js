@@ -1,66 +1,66 @@
-import { filterData, sortData, computeStats, renderView, renderTypes } from './data.js';
-import data from './data/pokemon/pokemon.js';
+import { filterData, sortData, computeStats } from './dataFunctions.js';
+import { renderView, renderFilterOptions } from './viewFunctions.js';
+import data from './data/pokemon/pokemon.js'; // requirement that the data should be named data.js
+
 const root = document.getElementById('root')
-const inputUser = document.querySelector('#input-user');
-const selectOrder = document.querySelector('[name="select-order"]');
-const selectType = document.querySelector('[name="select-type"]');
-const estadistics = document.querySelector('#estadistics');
+const searchInput = document.querySelector('input[type="search"]');
+const selectSort = document.querySelector('#select-sort');
+const selectFilter = document.querySelector('#select-filter');
+const resetButton = document.querySelector('#button-reset');
+const estadistics = document.querySelector('#button-stats');
 
+let pokemonList;
 
-inputUser.addEventListener('keyup', (e) => {
-  const arrayFiltered = filterData(data.pokemon, 'name', e.target.value);
-  root.innerHTML = renderView(arrayFiltered);
+const setPokemonList = (arrayData) => {
+  pokemonList = arrayData;
+  root.innerHTML = renderView(pokemonList);
+}
+
+const getSortedArray = (arrayData) => {
+  if (selectSort.querySelector('option[selected]').disabled) {
+    return arrayData;
+  }
+  return sortData(arrayData, selectSort.name, selectSort.value);
+}
+
+searchInput.addEventListener('keyup', (e) => {
+  // search todo el pokemon
+  const arrayFiltered = filterData(data.pokemon, selectFilter.name, e.target.value);
+  const arraySorted = getSortedArray(arrayFiltered);
+  setPokemonList(arraySorted);
+});
+
+searchInput.addEventListener('search', (e) => {
+  if (e.target.value === '') {
+    setPokemonList(data.pokemon);
+  }
+});
+
+selectSort.addEventListener('change', (e) => {
+  const arrayOrdered = sortData(pokemonList, selectSort.name, e.target.value);
+  setPokemonList(arrayOrdered);
 })
 
-selectOrder.addEventListener('change', (e) => {
-  const arrayOrdered = sortData(data.pokemon, 'name', e.target.value);
-  root.innerHTML = renderView(arrayOrdered);
-})
-
-selectType.addEventListener('change', (e) => {
-  const arrayType = filterData(data.pokemon, 'type', e.target.value);
-  root.innerHTML = renderView(arrayType);
+selectFilter.addEventListener('change', (e) => {
+  const arrayFiltered = filterData(data.pokemon, selectFilter.name, e.target.value);
+  const arraySorted = getSortedArray(arrayFiltered);
+  setPokemonList(arraySorted);
 })
 
 estadistics.addEventListener('click', () => {
   root.innerHTML = `
-                    <p>Este es el promedio de base attack ${computeStats(data.pokemon, 'base-attack')}</p>
-                    <p>Este es el promedio de base defense ${computeStats(data.pokemon, 'base-defense')}</p>
-                    <p>Este es el promedio de base stamina ${computeStats(data.pokemon, 'base-stamina')}</p>
-                    <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-cp')}</p>
-                    <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-hp')}</p>
-                    `;
+    <p>Este es el promedio de base attack ${computeStats(data.pokemon, 'base-attack')}</p>
+    <p>Este es el promedio de base defense ${computeStats(data.pokemon, 'base-defense')}</p>
+    <p>Este es el promedio de base stamina ${computeStats(data.pokemon, 'base-stamina')}</p>
+    <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-cp')}</p>
+    <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-hp')}</p>
+  `;
 })
 
-root.innerHTML = renderView(data.pokemon);
-selectType.innerHTML = renderTypes(data.pokemon);
+resetButton.addEventListener('click', () => {
+  document.querySelector('form').reset();
+  setPokemonList(data.pokemon);
+});
 
-// window.addEventListener("DOMContentLoaded", () => {
-//   root.innerHTML = renderView(data.pokemon);
-//   renderTypes();
-//   inputUser.addEventListener('keyup', (e) => {
-//     const arrayFiltered = filterData(data.pokemon, 'name', e.target.value);
-//     renderView(arrayFiltered);
-//   })
-  
-//   selectOrder.addEventListener('change', (e) => {
-//     const arrayOrdered = sortData(data.pokemon, 'name', e.target.value);
-//     renderView(arrayOrdered);
-//   })
-  
-//   selectType.addEventListener('change', (e) => {
-//     const arrayType = filterData(data.pokemon, 'type', e.target.value);
-//     renderView(arrayType);
-//   })
-  
-//   estadistics.addEventListener('click', () => {
-//     root.innerHTML = `
-//                       <p>Este es el promedio de base attack ${computeStats(data.pokemon, 'base-attack')}</p>
-//                       <p>Este es el promedio de base defense ${computeStats(data.pokemon, 'base-defense')}</p>
-//                       <p>Este es el promedio de base stamina ${computeStats(data.pokemon, 'base-stamina')}</p>
-//                       <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-cp')}</p>
-//                       <p>Este es el promedio de max-cp ${computeStats(data.pokemon, 'max-hp')}</p>
-//                       `;
-//   })
-  
-// });
+setPokemonList(data.pokemon);
+selectFilter.innerHTML = renderFilterOptions(data.pokemon);

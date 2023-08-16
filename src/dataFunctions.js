@@ -30,21 +30,3 @@ export const getArrayUnique = (arrayData, property) => {
     return acc;
   },[]);
 }
-
-// TODO: revisamos si colocamos el render view se queda aqui o si colocamos render view en un windows.
-// addeventlistener DOMContentLoaded en el main.js.
-export const renderView = (arrayData) => {
-  const lis = arrayData.map(element => `<li class= "card">
-                                          <img src=${element.img}>
-                                          <p>Name: ${element.name}</p>
-                                          <p>Num: ${element.num}</p>
-                                          <p>Type: ${element.type.join(', ')}</p>
-                                        </li>`);
-  return  `<div><ul class='wrap'>${lis.join('')}<ul></div>`;
-}
-
-export const renderTypes = (arrayData) =>{
-  const firstOption = `<option selected disabled>Selecciona el tipo</option>`;
-  const options = getArrayUnique(arrayData, 'type').map( type => `<option>${type}</option>`);
-  return firstOption + options.join('');
-}

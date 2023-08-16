@@ -11,25 +11,29 @@
       <h2>Pokemon lover</h2>
     </header>
     <main>
-      <div class="flexNav">
-        <div>
-          <label>Búsqueda: </label>
-          <input type="text" id="input-user" placeholder="Busqueda por nombre">
-        </div>
-        <div>
-          <label for="select-order">Ordenar por nombre: </label>
-          <select name="select-order">
-            <option disabled selected>Elige el orden segun nombre</option>
-            <option>asc</option>
-            <option>desc</option>
-          </select>
-        </div>
-        <div>
-          <label for="select-type">Filtro por tipo: </label>
-          <select name="select-type">   
-          </select>
-          <button id="estadistics">Estadisticas</button>
-        </div>
+      <section aria-label="filter and sort options">
+        <form class="flexNav">
+          <div>
+            <label id="input-search">Búsqueda:</label>
+            <input type="search" id="input-search" placeholder="Busqueda por nombre">
+          </div>
+          <div>
+            <label for="select-sort">Ordenar por nombre:</label>
+            <select id="select-sort" name="name">
+              <option disabled selected>Elige el orden segun nombre</option>
+              <option value="asc">A-Z</option>
+              <option value="desc">Z-A</option>
+            </select>
+          </div>
+          <div>
+            <label for="select-filter">Filtro por tipo:</label>
+            <select id="select-filter" name="type">   
+            </select>
+            
+          </div>
+          <button id="button-reset" type="button">Reset</button>
+          <button id="button-stats" type="button">Estadisticas</button>
+        </form>
       </div>
       <div id="root"></div>
     </main>
