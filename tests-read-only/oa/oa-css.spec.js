@@ -22,6 +22,15 @@ const getRulesForSelector = (selector) => {
   );
 }
 
+const tagRulesCSS = (tag) =>{
+  const tagClasses = Array.from(tag.classList.values());
+  return tagClasses.reduce((allRules, tagClass) => {
+    const rules = getRulesForSelector(`.${tagClass}`);
+    const tagRulesAttributes = rules[0].declarations.map((declaration) => declaration.property);
+    return allRules.concat(tagRulesAttributes);
+  }, []);
+  
+}
 const fakeData = [
   {
     name: "charizard",
@@ -46,23 +55,34 @@ document.querySelector('#root').innerHTML = renderView(fakeData);
 describe('CSS', () => {
   const ul = document.querySelector('#root ul');
   const cardsLi = ul.querySelectorAll('li');
-  const ulClasses = Array.from(ul.classList.values());
 
   describe('Uso de selectores de CSS', () => {
     it('li elementos tienen class', () => {
-      cardsLi.forEach(item=>{
-        expect(item.getAttribute('class')).toBe('card');
+      cardsLi.forEach((li)=>{
+        const liClasses = Array.from(li.classList.values());
+        if(liClasses.length){
+          const rules = getRulesForSelector(`.card`);
+          const ulRulesAttributes = rules[0].declarations.map((declaration) => declaration.property);
+          expect(ulRulesAttributes.length).toBeGreaterThan(0);
+        }
+        expect(liClasses.length).toBeGreaterThan(0);
       });
     });
 
+    it('El contenedor padre de las etiquetas select usa flexbox', () => {
+      const parentContainer = document.querySelector('.flexNav');
+      const selects = parentContainer.querySelectorAll('select')
+      if(selects.length > 0){
+        const rules = getRulesForSelector(`.flexNav`);
+        const ulRulesAttributes = rules[0].declarations.map((declaration) => declaration.value);
+        expect(ulRulesAttributes).toContain('flex');
+      }
+      expect(selects.length).toBeGreaterThan(0);
+    });
+
     it('Uso de flexbox en la clase del ul', () => {
-      const allRulesAttributes = ulClasses.reduce((allRules, ulClass) => {
-        const rules = getRulesForSelector(`.${ulClass}`);
-        const ulRulesAttributes = rules[0].declarations.map((declaration) => declaration.property);
-        return allRules.concat(ulRulesAttributes);
-      }, []);
       expect(
-        allRulesAttributes.some(
+        tagRulesCSS(ul).some(
           (attribute) => FLEXBOX_ATTRIBUTES.some(
             flexboxAttribute => attribute.startsWith(flexboxAttribute)
           )
@@ -88,24 +108,17 @@ describe('CSS', () => {
 
   describe('Modelo de caja (box model)', () => {  
     it('Se usan atributos de modelo de caja en clase CSS para <li>', () => {
-      let allRulesAttributes = [];
       cardsLi.forEach((li) => {
-        const liClasses = Array.from(li.classList.values());
-        liClasses.forEach((liClass) => {
-          const liRules = getRulesForSelector(`.${liClass}`);
-          const ulRulesAttributes = liRules[0].declarations.map((declaration) => declaration.property);
-          allRulesAttributes = allRulesAttributes.concat(ulRulesAttributes);
-        });
+        expect(
+          tagRulesCSS(li).some(
+            (attribute) => BOX_MODEL_ATTRIBUTES.some(
+              boxModelAttribute => attribute.startsWith(boxModelAttribute)
+            )
+          )        
+        ).toBe(true);
       });
   
       //expect at least one ulRulesAttributes starts with at least one element of boxModelAttributes
-      expect(
-        allRulesAttributes.some(
-          (attribute) => BOX_MODEL_ATTRIBUTES.some(
-            boxModelAttribute => attribute.startsWith(boxModelAttribute)
-          )
-        )        
-      ).toBe(true);
     });
   });
 });
