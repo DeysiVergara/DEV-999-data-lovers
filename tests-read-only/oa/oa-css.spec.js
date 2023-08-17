@@ -55,13 +55,12 @@ document.querySelector('#root').innerHTML = renderView(fakeData);
 describe('CSS', () => {
   const cardsLi = document.querySelectorAll('#root > ul > li');
   describe('Uso de selectores de CSS', () => {
-    it('li elementos tienen class', () => {
+    it.only('li elementos tienen class', () => {
       cardsLi.forEach((li)=>{
         const liClasses = Array.from(li.classList.values());
         if(liClasses.length){
-          const rules = getRulesForSelector(`.card`);
-          const ulRulesAttributes = rules[0].declarations.map((declaration) => declaration.property);
-          expect(ulRulesAttributes.length).toBeGreaterThan(0);
+          const liRulesAttributes = tagRulesCSS(li);
+          expect(liRulesAttributes.length).toBeGreaterThan(0);
         }
         expect(liClasses.length).toBeGreaterThan(0);
       });

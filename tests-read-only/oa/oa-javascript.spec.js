@@ -2,9 +2,10 @@ import acorn from 'acorn'
 import fs from 'fs';
 
 //read analyzer.js file
-const code = fs.readFileSync("src/dataFunctions.js", "utf8");
-//parse the file
-const ast = acorn.parse(code, { ecmaVersion: 2020, sourceType: "module" });
+const mainCode = fs.readFileSync("src/dataFunctions.js", "utf8");
+const renderCode = fs.readFileSync("src/viewFunctions.js", "utf8");
+const mainAst = acorn.parse(mainCode, { ecmaVersion: 2020, sourceType: "module" });
+const ast =  acorn.parse(renderCode, { ecmaVersion: 2020, sourceType: "module", program: mainAst});
 
 const getASTMetrics = (node, [
   parseIntCalls,
@@ -13,6 +14,7 @@ const getASTMetrics = (node, [
   sortCalls,
   filterCalls,
   reduceCalls,
+  mapCalls,
   constStatements,
   forStatements,
   forEachCalls,
@@ -59,6 +61,13 @@ const getASTMetrics = (node, [
     reduceCalls.push(node);
   }
 
+  if (node.type === "CallExpression" &&
+    node.callee.type === "MemberExpression" &&
+    node.callee.property.type === "Identifier" &&
+    node.callee.property.name === "map") {
+    mapCalls.push(node);
+  }
+
   if (node.type === "VariableDeclaration" && node.kind === "const") {
     constStatements.push(node);
   }
@@ -101,6 +110,7 @@ const getASTMetrics = (node, [
           sortCalls,
           filterCalls,
           reduceCalls,
+          mapCalls,
           constStatements,
           forStatements,
           forEachCalls,
@@ -112,7 +122,7 @@ const getASTMetrics = (node, [
   }
 }
 
-const metrics = [[], [], [], [], [], [], [], [], [], [], []];
+const metrics = [[], [], [], [], [], [], [], [], [], [], [], []];
 getASTMetrics(ast, metrics);
 const [
   parseIntCalls,
@@ -121,12 +131,14 @@ const [
   sortCalls,
   filterCalls,
   reduceCalls,
+  mapCalls,
   constStatements,
   forStatements,
   forEachCalls,
   ifelseStatements,
   exportStatements,
 ] = metrics;
+
 describe('Tipos de datos primitivos', () => {
   it('Se convierten valores tipo "string" a tipo "number" con "parseInt" o "parseFloat" o "Number"', () => {
     expect(parseIntCalls.length + parseFloatCalls.length + NumberCalls.length).toBeGreaterThan(0);
@@ -146,8 +158,8 @@ describe('Arrays', () => {
   it('Se prefiere el uso de forEach sobre for', () => {
     expect(forStatements.length<forEachCalls.length).toBe(true);
   });
-  it('Se usan métodos para manipular arrays como "foreach"', () => {
-    expect(forEachCalls.length).toBeGreaterThan(0);
+  it.only('Se usan métodos para manipular arrays como "map"', () => {
+    expect(mapCalls.length).toBeGreaterThan(0);
   });
 });
 

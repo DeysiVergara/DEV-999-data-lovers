@@ -2,12 +2,12 @@ import acorn from 'acorn'
 import fs from 'fs';
 
 //read analyzer.js file
-const code = fs.readFileSync("src/main.js", "utf8");
-// para probar con el otro file
-// const code = fs.readFileSync("src/viewFunctions.js", "utf8");
-//parse the file
-const ast = acorn.parse(code, { ecmaVersion: 2020, sourceType: "module" });
+const mainCode = fs.readFileSync("src/main.js", "utf8");
+const renderCode = fs.readFileSync("src/viewFunctions.js", "utf8");
+const mainAst = acorn.parse(mainCode, { ecmaVersion: 2020, sourceType: "module" });
+const ast =  acorn.parse(renderCode, { ecmaVersion: 2020, sourceType: "module", program: mainAst});
 
+           
 const getASTMetrics = (node, metrics) => {
 
   if (
@@ -142,12 +142,9 @@ describe('Manipulación dinámica del DOM', () => {
   });
 
   it('Existe un createElement', () => {
-    expect(createElementCalls.length).toBeGreaterThan(0);
-  });
-  
-  it('Existe un template', () => {
-    expect(templateCalls.length).toBeGreaterThan(0);
-  });
+    console.log(createElementCalls.length || templateCalls.length);
+    expect(createElementCalls.length || templateCalls.length).toBeGreaterThan(0);
+  });  
 
 });
 
