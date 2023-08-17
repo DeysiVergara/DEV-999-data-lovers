@@ -1,3 +1,5 @@
+// should be named data-functions.js
+
 export const filterData = (arrayData, property, condition) => {
   return arrayData.filter(elem => elem[property].includes(condition.toLowerCase()));
 };
