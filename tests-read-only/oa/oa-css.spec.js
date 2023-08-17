@@ -55,7 +55,7 @@ document.querySelector('#root').innerHTML = renderView(fakeData);
 describe('CSS', () => {
   const cardsLi = document.querySelectorAll('#root > ul > li');
   describe('Uso de selectores de CSS', () => {
-    it.only('li elementos tienen class', () => {
+    it('li elementos tienen class', () => {
       cardsLi.forEach((li)=>{
         const liClasses = Array.from(li.classList.values());
         if(liClasses.length){
