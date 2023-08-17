@@ -141,7 +141,7 @@ describe('Manipulación dinámica del DOM', () => {
     expect(textContents.length + innerHTMLs.length).toBeGreaterThan(0);
   });
 
-  it('Existe un createElement', () => {
+  it('Existe manipulación dinamica mediante createElement o template strings', () => {
     console.log(createElementCalls.length || templateCalls.length);
     expect(createElementCalls.length || templateCalls.length).toBeGreaterThan(0);
   });  
