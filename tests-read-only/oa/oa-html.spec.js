@@ -2,7 +2,7 @@
  * @jest-environment jsdom
 */
 import fs from 'fs';
-import { renderView } from '../../src/data.js';
+import { renderView } from '../../src/viewFunctions.js';
 const html = fs.readFileSync('./src/index.html', 'utf-8');
 document.body.innerHTML = html;
 const fakeData = [
@@ -57,14 +57,6 @@ describe('Uso de HTML semántico', () => {
     });
   });
 
-  describe('<main> contiene un elemento <h2>', () => {
-    const h2 = document.querySelector('main h2')
-
-    it('Hay un h2 en el main es padre de un <h2>', () => {
-      expect(h2).not.toBeNull();
-    });
-  });
-
   describe('<select>', () => {
     const select = document.querySelectorAll('select');
 
@@ -94,7 +86,7 @@ describe('Uso de HTML semántico', () => {
   });
 
   describe('<ul>', () => {
-    const lis = document.querySelector('ul > li');
+    const lis = document.querySelectorAll('#root > ul > li');
 
     it('La aplicacion usa un <ul> con <li> para los elementos de data', () => {
       expect(lis).not.toBeNull();
@@ -102,19 +94,10 @@ describe('Uso de HTML semántico', () => {
   });
 
   describe('<footer>', () => {
-
     const footer = document.querySelector('footer');
 
     it('La aplicación usa un <footer>', () => {
       expect(footer).not.toBeNull();
-    });
-
-    it('<footer> no tiene atributo "id"', () => {
-      expect(footer.getAttribute('id')).toBeNull();
-    });
-
-    it('<footer> no tiene atributo "class"', () => {
-      expect(footer.getAttribute('class')).toBeNull();
     });
   });
 

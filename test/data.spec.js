@@ -1,4 +1,4 @@
-import { sortData, filterData, computeStats } from '../src/data.js';
+import { sortData, filterData, computeStats } from '../src/dataFunctions.js';
 
 const fakeData = [
   {

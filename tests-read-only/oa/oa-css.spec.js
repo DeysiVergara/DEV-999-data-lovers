@@ -3,7 +3,7 @@
 */
 import fs from 'fs';
 import css from 'css';
-import { renderView } from '../../src/data.js';
+import { renderView } from '../../src/viewFunctions.js';
 const html = fs.readFileSync('./src/index.html', 'utf-8');
 document.body.innerHTML = html;
 
@@ -53,9 +53,7 @@ const fakeData = [
 document.querySelector('#root').innerHTML = renderView(fakeData);
 
 describe('CSS', () => {
-  const ul = document.querySelector('#root ul');
-  const cardsLi = ul.querySelectorAll('li');
-
+  const cardsLi = document.querySelectorAll('#root > ul > li');
   describe('Uso de selectores de CSS', () => {
     it('li elementos tienen class', () => {
       cardsLi.forEach((li)=>{
@@ -81,6 +79,7 @@ describe('CSS', () => {
     });
 
     it('Uso de flexbox en la clase del ul', () => {
+      const ul = document.querySelector('#root ul');
       expect(
         tagRulesCSS(ul).some(
           (attribute) => FLEXBOX_ATTRIBUTES.some(
