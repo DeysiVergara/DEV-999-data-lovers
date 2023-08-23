@@ -1,11 +1,11 @@
 import { getArrayUnique } from './dataFunctions.js';
 
-// TODO: necesitamos renderView para los tests entonces no podemos colocar el renderView en el main.js
+// TODO: necesitamos renderItems para los tests entonces no podemos colocar el renderItems en el main.js
 // porque el codigo de main busca elementos que no existen en el test
-// o si queremos quedar con renderView en el main necesitamos usar window DOMContentLoaded
+// o si queremos quedar con renderItems en el main necesitamos usar window DOMContentLoaded
 // para los elementos y listeners
 
-export const renderView = (arrayData) => {
+export const renderItems = (arrayData) => {
   const lis = arrayData.map(element => `<li class="card" data-id="${element.num}" itemscope itemtype="https://schema.org/Thing">
     <img itemprop="image" src=${element.img}>
     <dl>

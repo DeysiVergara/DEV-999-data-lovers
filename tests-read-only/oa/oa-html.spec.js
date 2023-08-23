@@ -2,7 +2,7 @@
  * @jest-environment jsdom
 */
 import fs from 'fs';
-import { renderView } from '../../src/viewFunctions.js';
+import { renderItems } from '../../src/viewFunctions.js';
 const html = fs.readFileSync('./src/index.html', 'utf-8');
 document.body.innerHTML = html;
 const fakeData = [
@@ -24,7 +24,7 @@ const fakeData = [
     ],
   },
 ];
-document.querySelector('#root').innerHTML = renderView(fakeData);
+document.querySelector('#root').innerHTML = renderItems(fakeData);
 
 describe('Uso de HTML semántico', () => {
 
@@ -61,26 +61,30 @@ describe('Uso de HTML semántico', () => {
     const select = document.querySelectorAll('select');
 
     it('La aplicación usa un <select>', () => {
-      expect(select).not.toBeNull();
+      expect(select.length).toBeGreaterThan(0);
     });
 
     it('<select> tiene atributo "name"', () => {
       Array.from(select).forEach((element) => {
-        expect(element.getAttribute('name')).not.toBeNull();
+        expect(element.getAttribute('name').length).toBeGreaterThan(0);
       })
+      expect(select.length).toBeGreaterThan(0);
     });
 
     it('<select> no tiene atributo "class"', () => {
       Array.from(select).forEach((element) => {
         expect(element.getAttribute('class')).toBeNull();
       })
+      expect(select.length).toBeGreaterThan(0);
     });
 
     it('<label> existe', () => {
+      const label = document.querySelectorAll('label');
       Array.from(select).forEach((element) => {
         const previousFor = element.previousElementSibling.getAttribute('for');
         expect(previousFor).toBe(element.id);
       })
+      expect(select.length && label.length).toBeGreaterThan(0)
     })
 
   });

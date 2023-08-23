@@ -1,5 +1,5 @@
 import { filterData, sortData, computeStats } from './dataFunctions.js';
-import { renderView, renderFilterOptions } from './viewFunctions.js';
+import { renderItems, renderFilterOptions } from './viewFunctions.js';
 import data from './data/pokemon/pokemon.js'; // requirement that the data should be named data.js
 
 const root = document.getElementById('root')
@@ -13,7 +13,7 @@ let pokemonList;
 
 const setPokemonList = (arrayData) => {
   pokemonList = arrayData;
-  root.innerHTML = renderView(pokemonList);
+  root.innerHTML = renderItems(pokemonList);
 }
 
 const getSortedArray = (arrayData) => {
