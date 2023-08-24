@@ -36,23 +36,15 @@ usuarias, al lado derecho.
 ## 2. Resumen del proyecto
 
 En este proyecto **construirás una _página web_ para visualizar un
-_conjunto (set) de datos_** que se adecúe a lo que descubras que tu usuario
-necesita.
+_conjunto (set) de datos_** que se adecúe a lo que descubras que tu usuaria necesita.
 
-Como entregable final tendrás una página web que permita **visualizar la data,
-filtrarla, ordenarla y hacer algún cálculo agregado**. Con cálculo agregado
-nos referimos a distintos cálculos que puedes hacer con la data para mostrar
-información aún más relevante para los usuarios (promedio, el valor máximo
-o mínimo, etc).
+Como entregable final tendrás una página web que permita **visualizar la data, filtrarla, ordenarla y hacer algún cálculo agregado**. Con cálculo agregado nos referimos a distintos cálculos que puedes hacer con la data para mostrar información aún más relevante para los usuarios (promedio, el valor máximo o mínimo, etc).
 
 Esta vez te proponemos una serie de datos de diferentes _temáticas_ para que
 explores y decidas con qué temática te interesa trabajar. Hemos elegido
-específicamente estos sets de datos porque creemos que se adecúan bien a esta
-etapa de tu aprendizaje.
+específicamente estos sets de datos porque creemos que se adecúan bien a esta etapa de tu aprendizaje.
 
-Una vez que definas tu área de interés, buscar entender quién es tu usuario
-y qué necesita saber o ver exactamente; luego podrás construir la interfaz que
-le ayude a interactuar y entender mejor esos datos.
+Una vez que definas tu área de interés, buscar entender quién es tu usuaria y qué necesita saber o ver exactamente, luego podrás construir la interfaz que le ayude a interactuar y entender mejor esos datos.
 
 Estos son datos que te proponemos:
 
@@ -74,7 +66,7 @@ Estos son datos que te proponemos:
 
 * [Juegos Olímpicos de Río de Janeiro](src/data/athletes/athletes.json).
   Este set nos proporciona la lista de los atletas que ganaron medallas en las
-  olímpiadas de Río de Janeiro.
+  olimpiadas de Río de Janeiro.
   - [Investigación con interesados en juegos olímpicos de Río de Janeiro](src/data/athletes/README.md)
 
 * [Studio Ghibli](src/data/ghibli/ghibli.json).
@@ -82,25 +74,22 @@ Estos son datos que te proponemos:
   [Studio Ghibli](https://ghiblicollection.com/).
   - [Investigación con seguidores de las animaciones del Studio Ghibli](src/data/ghibli/README.md)
 
-El objetivo principal de este proyecto es que aprendas a diseñar y construir una
-interfaz web donde se pueda visualizar y manipular data, entendiendo lo que el
-usuario necesita.
+El objetivo principal de este proyecto es que aprendas a diseñar y construir una interfaz web donde se pueda visualizar y manipular data, entendiendo los que el usuaria necesita.
 
 ## 3. Funcionalidades
 
 La pagina que construyas para visualizar la data debe tener las funcionalidades siguientes:
 
-- La aplicación debe permitir la usuaria ver los items de la data en una visualización de tarjetas (o tabla o lista?). 
-- Las tarjetas deben resaltar los valores de propiedades de la data que interesaría la usuaria ver. Por 
-  ejemplo: nombre, fecha. Si vas a filtrar o ordenar por una propiedad, la tarjeta tiene que mostrar este
-  valor al usuario.
-- La data en la tarjetas tiene estructura semantica usando los attributos [`itemprop`](https://developer.mozilla.org/en-US/ docs/Web/HTML/Global_attributes/itemprop) y `itemscope`. 
-- La aplicación debe permitir la usuaria filtrar e ordenar la data con su interfaz:
-  * un control para filtrar la data. Un [`select`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)
-  con attributo `name` que es el nombre de la propiedad por la que filtrará.
-  (Ejemplo: si vas a filtrar por "type" seria `name="type"`). Los opciones de `select` tendrán
-  un `value` de la propiedad (Ejemplo: `value="fire"`). 
-  * un control para ordenar la data. Puede ser un select con attributo `name` de la propiedad por la que ordenará,
+- La aplicación debe permitir a la usuaria ver los items de la data en una visualización de tarjetas. Cada una de las tarjetas deben estar contenidas en un elemento <li> y este a su vez contenido en un elemento <ul>.
+
+- Las tarjetas deben resaltar los valores de propiedades de la data que interesaría la usuaria ver, por ejemplo: nombre, fecha, imagen, etc. Si vas a filtrar o ordenar por una propiedad, la tarjeta tiene que mostrar el valor de esta propiedad al usuario.
+
+- La data en la tarjetas tiene estructura semantica usando los attributos [`itemprop`](https://developer.mozilla.org/en-US/ docs/Web/HTML/Global_attributes/itemprop) y `itemscope`.
+
+- La aplicación debe permitir la usuaria filtrar y ordenar la data con su interfaz (cada una de las tarjetas):
+  * Para filtrar la data podemos usar como control un [`select`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) con attributo `name` con el nombre de la propiedad por la que filtrará. (Ejemplo: si quieres a filtrar por "type" se vería así <select  name="type"><select>). 
+  Los <option> de <select> tendrán un `value` de la propiedad a filtrar(Ejemplo: si vas a filtrar por la propiedad `fire` la `option` se vería así: <option value="fire">Fire<option>). 
+  * Para ordenar la data podemos usar como control un select con attributo `name` de la propiedad por la que ordenará,
   y dos opciones con valor `asc` y `desc` respectivamente. Una alternativa mas complejo, podrias implementar
   un select que contiene varios opciones con un `value` de un nombre de propiedad distinta de la data. Este
   `value` puedes usar para ordenar la data en conjunto con un control acostado con valores `asc` y `desc`.
@@ -377,9 +366,9 @@ Con cada Objetivo de Aprendizaje, evaluamos qiue cumplen algunos criterios.
 
   * **Funciones (params, args, return)**
     En el archivo `dataFunctions.js` define:
-    - [ ] una función `sortBy` que tiene 3 parámetros (`data`, `sortBy`, `sortOrder`) y devuelva el arreglo ordenado
-    - [ ] una función `filterBy` que tiene 3 parámetros (`data`, `filterBy`, `value`) y devuelva el arreglo filtrado
-    - [ ] una función `computeStats` que tiene al menos un parámetro (`data`) y devuelva un valor computado
+    - [ ] una función `sortBy` que tiene 3 parámetros (`data`, `sortBy`, `sortOrder`) y devuelva el arreglo ordenado.
+    - [ ] una función `filterBy` que tiene 3 parámetros (`data`, `filterBy`, `value`) y devuelva el arreglo filtrado.
+    - [ ] una función `computeStats` que tiene al menos un parámetro (`data`) y devuelva un valor computado, esta función debe usar el método reduce.
 
   * **Arrays (arreglos)**
 
@@ -417,7 +406,7 @@ Con cada Objetivo de Aprendizaje, evaluamos qiue cumplen algunos criterios.
 
   - [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
 
-### Centrado en el usuario
+### Centrado en la usuaria
 
   - [ ] **Diseñar y desarrollar un producto o servicio poniendo a las usuarias en el centro**
 
@@ -438,13 +427,13 @@ Otros criterios para considerar que has completado este proyecto son:
 
 Documenta brevemente tu trabajo en el archivo `README.md` de tu repositorio,
 contándonos cómo fue tu proceso de diseño y cómo crees que el producto resuelve
-el problema (o problemas) que tiene tu usuario.
+el problema (o problemas) que tiene tu usuaria.
 
 ### Historias de usuario
 
-Una vez que entiendas las necesidades de tus usuarios, escribe las [Historias
-de Usuario](https://es.wikipedia.org/wiki/Historias_de_usuario) que representen
-todo lo que el usuario necesita hacer/ver. Las **Historias de Usuario** deben
+Una vez que entiendas las necesidades de tus usuarias, escribe las [Historias
+de Usuaria](https://es.wikipedia.org/wiki/Historias_de_usuario) que representen
+todo lo que la usuaria necesita hacer/ver. Las **Historias de Usuario** deben
 ser el resultado de tu proceso de investigación o _research_ de tus usuarios.
 
 Asegúrate de incluir la definición de terminado (_definition of done_) y los
@@ -521,9 +510,7 @@ Features/características extra sugeridas:
 
 La lógica del proyecto debe estar implementada completamente en JavaScript
 (ES6), HTML y CSS. En este proyecto NO está permitido usar librerías o
-frameworks, solo [vanilla JavaScript](https://medium.com/laboratoria-how-to/vanillajs-vs-jquery-31e623bbd46e),
-con la excepción de librerías para hacer gráficas (charts); ver
-[_Parte opcional_](#6-hacker-edition) más arriba.
+frameworks, solo [vanilla JavaScript](https://medium.com/laboratoria-how-to/vanillajs-vs-jquery-31e623bbd46e), con la excepción de librerías para hacer gráficas (charts); ver [_Parte opcional_](#6-hacker-edition) más arriba.
 
 El _boilerplate_ contiene una estructura de archivos como punto de partida así
 como toda la configuración de dependencias:
@@ -558,7 +545,7 @@ como toda la configuración de dependencias:
 ### `src/index.html`
 
 Como en el proyecto anterior, existe un archivo `index.html`. Como ya sabes,
-acá va la página que se mostrará al usuario. También nos sirve para indicar
+acá va la página que se mostrará la usuaria. También nos sirve para indicar
 qué scripts se usarán y unir todo lo que hemos hecho.
 
 ### `src/main.js`
@@ -614,7 +601,7 @@ a obtener, procesar y manipular datos (tus funciones). Por ejemplo:
 
 Estas funciones deben ser [_puras_](https://medium.com/laboratoria-developers/introducci%C3%B3n-a-la-programaci%C3%B3n-funcional-en-javascript-parte-2-funciones-puras-b99e08c2895d)
 e independientes del DOM. Estas funciones serán después usadas desde el archivo
-`src/main.js`, al cargar la página, y cada vez que el usuario interactúe (click,
+`src/main.js`, al cargar la página, y cada vez que la usuaria interactúe (click,
 filtrado, ordenado, ...).
 
 ### `src/data`
@@ -641,7 +628,7 @@ Súmate al canal de Slack
 para conversar y pedir ayuda del proyecto.
 
 Antes de empezar a escribir código, debes definir qué deberá hacer el producto
-en base al conocimiento que puedas obtener de tu usuario. Estas preguntas te
+en base al conocimiento que puedas obtener de tu usuaria. Estas preguntas te
 pueden ayudar:
 
 * ¿Quiénes son los principales usuarios de producto?
