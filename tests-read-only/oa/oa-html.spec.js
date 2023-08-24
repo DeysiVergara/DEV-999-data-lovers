@@ -95,6 +95,14 @@ describe('Uso de HTML semántico', () => {
     it('La aplicacion usa un <ul> con <li> para los elementos de data', () => {
       expect(lis.length).toBeGreaterThan(0);
     });
+
+    it('<li> tiene atributo "itemtype"', () => {
+      Array.from(lis).forEach((li) => {
+        expect(li.getAttribute('itemtype')).not.toBeNull();
+      })
+      expect(lis.length).toBeGreaterThan(0); 
+    });
+
   });
 
   describe('<footer>', () => {
