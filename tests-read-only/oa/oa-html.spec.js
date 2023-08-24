@@ -93,7 +93,7 @@ describe('Uso de HTML semántico', () => {
     const lis = document.querySelectorAll('#root > ul > li');
 
     it('La aplicacion usa un <ul> con <li> para los elementos de data', () => {
-      expect(lis).not.toBeNull();
+      expect(lis.length).toBeGreaterThan(0);
     });
   });
 
