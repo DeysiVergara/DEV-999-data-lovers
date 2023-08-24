@@ -99,6 +99,7 @@ describe('Uso de HTML semántico', () => {
     it('<li> tiene atributo "itemtype"', () => {
       Array.from(lis).forEach((li) => {
         expect(li.getAttribute('itemtype')).not.toBeNull();
+        expect(li.getAttribute('itemscope')).not.toBeNull();
       })
       expect(lis.length).toBeGreaterThan(0); 
     });
