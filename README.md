@@ -183,6 +183,7 @@ como toda la configuración de dependencias:
 |  ├── main.js
 |  └── style.css
 └── test
+   └── data.js
    └── data.spec.js
 └── tests-read-only
 
@@ -265,8 +266,16 @@ asíncrona con [`fetch()`](https://developer.mozilla.org/es/docs/Web/API/Fetch_A
 
 ### `test/dataFunctions.spec.js`
 
-Tendrás también que completar las pruebas unitarias de las funciones
-implementadas en el archivo `dataFunctions.js`.
+En este archivo tendrás hacer pruebas unitarias de las funciones
+implementadas en el archivo `dataFunctions.js`. (`filterBy`, `sortBy`, etc.)
+
+### `test/data.js`
+
+En esta archivo puedes construir y exportar data "mock" para usar en los tests.
+Es mas fácil probar un arreglo de 5 elementos de un arreglo de 100, por eso
+vas a crear una muestra de la data que quieres probar. Al mínimo
+debes exportar un variable se llama `data`, pero puedes definir y exportar mas
+si sea necesario para tus tests.
 
 ### `src/viewFunctions.js`
 
@@ -274,11 +283,10 @@ Para alcanzar mejor separación de responsabilidades en el código este
 archivo debe tener todas las funciones que utilizara para renderizar
 los elementos dinámicamente. 
 
-Al menos requerimos una función obligatoria.
+Al menos requerimos una función obligatoria:
 
 * `renderItems(data)`: esta función recibe el arreglo de data para renderizar
-  los elementos de cada item, y deberia volver un elemento DOM o un string de HTML.
-
+  los elementos de cada item, y debería volver un elemento DOM o un string de HTML.
 
 ## 6. Criterios de aceptación mínimos del proyecto
 

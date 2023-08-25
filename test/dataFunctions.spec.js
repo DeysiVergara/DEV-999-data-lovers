@@ -1,45 +1,6 @@
 import { sortData, filterData, computeStats } from '../src/dataFunctions.js';
+import { data as fakeData } from './data.js';
 
-const fakeData = [
-  {
-    name: "venusaur",
-    type: [
-      "fire",
-      "flying"
-    ],
-    stats: {
-      "base-attack": "223"
-    }
-  },
-  {
-    name: "sludge bomb",
-    type: [
-      "grass",
-    ],
-    stats: {
-      "base-attack": "200"
-    }
-  },
-  {
-    name: "charmeleon",
-    type: [
-      "fire"
-    ],
-    stats: {
-      "base-attack": "100"
-    }
-  },
-  {
-    name: "charizard",
-    type: [
-      "fire",
-      "grass"
-    ],
-    stats: {
-      "base-attack": "80"
-    }
-  }
-]
 describe('sortData', () => {
   const orderedData = [
     {
