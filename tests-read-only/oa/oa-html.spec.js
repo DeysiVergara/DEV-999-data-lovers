@@ -8,13 +8,30 @@ import { data as fakeData } from '../../test/data.js';
 const html = fs.readFileSync('./src/index.html', 'utf-8');
 document.body.innerHTML = html;
 
-document.querySelector('#root').innerHTML = renderItems(fakeData);
+const renderDOM = (data) => {
+  const items = renderItems(data);
+  // function renderItems can return html string or an node element
+  if (typeof items === 'string') {
+    document.querySelector('#root').innerHTML = items;
+  } else if (items instanceof HTMLElement) {
+    document.querySelector('#root').appendChild(items);
+  } else {
+    throw new Error('Error: renderItems should return an HTML string or an HTMLElement');
+  }
+}
 
 describe('Uso de HTML semántico', () => {
+  
+  beforeEach(() => {
+    renderDOM(fakeData);
+  });
 
   describe('<header>', () => {
-    const header = document.querySelector('header');
-    const h1 = header.querySelector('h1');
+    let header, h1;
+    beforeEach(() => {
+      header = document.querySelector('header');
+      h1 = header.querySelector('h1');
+    });
 
     it('La aplicación usa un <header>', () => {
       expect(header).not.toBeNull();
@@ -42,7 +59,10 @@ describe('Uso de HTML semántico', () => {
   });
 
   describe('<select>', () => {
-    const select = document.querySelectorAll('select');
+    let select = [];
+    beforeEach(()=>{
+      select = document.querySelectorAll('select');
+    });
 
     it('La aplicación usa un <select>', () => {
       expect(select.length).toBeGreaterThan(0);
@@ -52,14 +72,14 @@ describe('Uso de HTML semántico', () => {
       Array.from(select).forEach((element) => {
         expect(element.getAttribute('name').length).toBeGreaterThan(0);
       })
-      expect(select.length).toBeGreaterThan(0);
+      expect.hasAssertions();
     });
 
     it('<select> no tiene atributo "class"', () => {
       Array.from(select).forEach((element) => {
         expect(element.getAttribute('class')).toBeNull();
       })
-      expect(select.length).toBeGreaterThan(0);
+      expect.hasAssertions();
     });
 
     it('<label> existe', () => {
@@ -68,13 +88,16 @@ describe('Uso de HTML semántico', () => {
         const previousFor = element.previousElementSibling.getAttribute('for');
         expect(previousFor).toBe(element.id);
       })
-      expect(select.length && label.length).toBeGreaterThan(0)
+      expect(select.length && label.length).toBeGreaterThan(0);
     })
 
   });
 
   describe('<ul>', () => {
-    const lis = document.querySelectorAll('#root > ul > li');
+    let lis = [];
+    beforeEach(()=>{
+      lis = document.querySelectorAll('#root > ul > li');
+    });
 
     it('La aplicacion usa un <ul> con <li> para los elementos de data', () => {
       expect(lis.length).toBeGreaterThan(0);
@@ -85,15 +108,14 @@ describe('Uso de HTML semántico', () => {
         expect(li.getAttribute('itemtype')).not.toBeNull();
         expect(li.getAttribute('itemscope')).not.toBeNull();
       })
-      expect(lis.length).toBeGreaterThan(0); 
+      expect.hasAssertions();
     });
 
   });
 
   describe('<footer>', () => {
-    const footer = document.querySelector('footer');
-
     it('La aplicación usa un <footer>', () => {
+      const footer = document.querySelector('footer');
       expect(footer).not.toBeNull();
     });
   });
