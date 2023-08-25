@@ -17,32 +17,72 @@ test.describe('Pagina interraciones', () => {
 
   const getDataIds = (elements) => Promise.all(elements.map(async (el) => await el.getAttribute('data-id')));  
 
+  const getSortOptions = async (page) => {
+    const selectSortEl = await page.$('#select-sort');
+    let sortByProperty = await selectSortEl.getAttribute('name'); 
+    const sortOrderEl = await page.$('[name="sort-order"]');
+
+    if (!sortOrderEl) { // simple sort UI with just one type of sort
+      const sortOrder = await selectSortEl.getAttribute('value');
+      return { 
+        selectSortEl,
+        sortByProperty,
+        sortOrderEl: selectSortEl,
+        sortOrder
+      };
+    }
+
+    const sortOrder = await sortOrderEl.getAttribute('value');
+    sortByProperty = await selectSortEl.getAttribute('name');
+    return { 
+      selectSortEl,
+      sortByProperty, 
+      sortOrderEl,
+      sortOrder
+    }
+  }
+
+  const selectSortOrder = async (sortOrderEl, orderOption) => {
+    try {
+      await sortOrderEl.selectOption(orderOption);
+    } catch(errSelect) {
+      try {
+        await sortOrderEl.check(orderOption);
+      } catch(errCheck) {
+        throw new Error(`No se puede seleccionar el orden ${orderOption} en el elemento ${sortOrderEl},
+          error select: ${errSelect}, error check: ${errCheck}`);
+      }
+    }
+  };
+
   test.describe('sort', () => {
 
-    let selectSort, orderProperty;
+    let sortOrderEl, sortByProperty;
   
     test.beforeEach(async ({ page }) => {
       await page.goto('http://localhost:3000/');
-      selectSort = await page.locator('#select-sort');
-      orderProperty = await selectSort.getAttribute('name');
+      ({ sortOrderEl, sortByProperty } = await getSortOptions(page));
     });
 
     test('de ascendente "asc" a descendente "desc"', async ({ page }) => {
-      await selectSort.selectOption(sortOptions.asc); 
-      const sortedValuesAsc = await getItempropValues(page, orderProperty);
+      // await sortOrderEl.selectOption(sortOptions.asc);
+      await selectSortOrder(sortOrderEl,sortOptions.asc); 
+      const sortedValuesAsc = await getItempropValues(page, sortByProperty);
 
-      await selectSort.selectOption(sortOptions.desc);
-      const sortedValuesDesc = await getItempropValues(page, orderProperty);
+      await selectSortOrder(sortOrderEl,sortOptions.desc);
+      //await sortOrderEl.selectOption(sortOptions.desc);
+      const sortedValuesDesc = await getItempropValues(page, sortByProperty);
 
       expect(sortedValuesDesc).toEqual(sortedValuesAsc.reverse());
     });
 
     test('de descendente "desc" a ascendente "asc"', async ({ page }) => {
-      await selectSort.selectOption(sortOptions.desc); // value desc
-      const sortedValuesDesc = await getItempropValues(page, orderProperty);
+      await selectSortOrder(sortOrderEl,sortOptions.desc);
+      const sortedValuesDesc = await getItempropValues(page, sortByProperty);
 
-      await selectSort.selectOption(sortOptions.asc);
-      const sortedValuesAsc = await getItempropValues(page, orderProperty);
+      // await sortOrderEl.selectOption(sortOptions.asc);
+      await selectSortOrder(sortOrderEl,sortOptions.asc);
+      const sortedValuesAsc = await getItempropValues(page, sortByProperty);
 
       expect(sortedValuesAsc).toEqual(sortedValuesDesc.reverse());
     });
@@ -72,16 +112,13 @@ test.describe('Pagina interraciones', () => {
 
   test.describe('sort + filter', () => {
 
-    let selectSort, sortProperty, selectFilter, filterProperty;
+    let sortOrderEl, sortByProperty, selectFilter;
 
     test.beforeEach(async ({ page }) => {
       await page.goto('http://localhost:3000/');
 
       selectFilter = await page.$('#select-filter');
-      filterProperty = await selectFilter.getAttribute('name');
-
-      selectSort = await page.locator('#select-sort');
-      sortProperty = await selectSort.getAttribute('name');
+      ({ sortOrderEl, sortByProperty } = await getSortOptions(page));
     });
 
     test('cuando elige un filtro y un sort, los resultados son afectado de ambos', async ({ page }) => {
@@ -89,13 +126,14 @@ test.describe('Pagina interraciones', () => {
 
       // sacamos los valores de propiedad en el orden que ocurre en la pagina
       // sin sort
-      const valuesNoSorted = await getItempropValues(page, sortProperty);  
+      const valuesNoSorted = await getItempropValues(page, sortByProperty);  
 
-      await selectSort.selectOption(sortOptions.asc);
-      const valuesSortedAsc = await getItempropValues(page, sortProperty);
+      await selectSortOrder(sortOrderEl,sortOptions.asc);
+      const valuesSortedAsc = await getItempropValues(page, sortByProperty);
   
-      await selectSort.selectOption(sortOptions.desc);
-      const valuesSortedDesc = await getItempropValues(page, sortProperty);
+      // await sortOrderEl.selectOption(sortOptions.desc);
+      await selectSortOrder(sortOrderEl,sortOptions.desc);
+      const valuesSortedDesc = await getItempropValues(page, sortByProperty);
 
       expect(valuesSortedAsc).toEqual([...valuesNoSorted].sort());
       expect(valuesSortedDesc).toEqual([...valuesNoSorted].sort().reverse());

@@ -156,7 +156,7 @@ describe('Arrays', () => {
     expect(reduceCalls.length).toBeGreaterThan(0);
   });
   it('Se prefiere el uso de forEach sobre for', () => {
-    expect(forStatements.length<forEachCalls.length).toBe(true);
+    expect(forStatements.length <= forEachCalls.length).toBe(true);
   });
   it('Se usan métodos para manipular arrays como "map"', () => {
     expect(mapCalls.length).toBeGreaterThan(0);

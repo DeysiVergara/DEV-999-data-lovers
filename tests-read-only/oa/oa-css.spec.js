@@ -4,6 +4,8 @@
 import fs from 'fs';
 import css from 'css';
 import { renderItems } from '../../src/viewFunctions.js';
+import { data as fakeData } from '../../test/data.js';
+
 const html = fs.readFileSync('./src/index.html', 'utf-8');
 document.body.innerHTML = html;
 
@@ -31,25 +33,7 @@ const tagRulesCSS = (tag) =>{
   }, []);
   
 }
-const fakeData = [
-  {
-    name: "charizard",
-    img: "https://www.serebii.net/pokemongo/pokemon/006.png",
-    num: '006',
-    type: [
-      "fire",
-      "flying"
-    ],
-  },
-  {
-    name: "charmeleon",
-    img: "https://www.serebii.net/pokemongo/pokemon/005.png",
-    num: '005',
-    type: [
-      "fire"
-    ],
-  },
-];
+
 document.querySelector('#root').innerHTML = renderItems(fakeData);
 
 describe('CSS', () => {
