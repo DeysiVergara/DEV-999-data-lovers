@@ -141,7 +141,6 @@ Estos wireframes son ejemplos de un interfaz que puede cumplir con esta funciona
 <img src="https://github.com/Laboratoria/impl-data-lovers/assets/92090/6cef16bc-643a-4d6d-bc1c-e0daaeb21c88" width="400" style="margin-left:20px" >
 </div>
 
-
 ## 4. Consideraciones generales
 
 * Este proyecto se debe resolver en duplas.
@@ -287,6 +286,7 @@ Al menos requerimos una función obligatoria:
 
 * `renderItems(data)`: esta función recibe el arreglo de data para renderizar
   los elementos de cada item, y debería volver un elemento DOM o un string de HTML.
+
 
 ## 6. Criterios de aceptación mínimos del proyecto
 
